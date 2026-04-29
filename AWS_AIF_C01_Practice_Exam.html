@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AWS AI Practitioner AIF-C01 Practice Exam</title>
+<style>
+:root {
+  --aws-orange: #FF9900;
+  --aws-orange-dark: #E88A00;
+  --aws-orange-dim: rgba(255,153,0,0.15);
+  --aws-orange-dim2: rgba(255,153,0,0.07);
+  --bg: #0d1117;
+  --bg2: #161b22;
+  --bg3: #1c2128;
+  --bg4: #21262d;
+  --border: #30363d;
+  --border2: #3d444d;
+  --text: #e6edf3;
+  --text2: #8b949e;
+  --text3: #656d76;
+  --green: #3fb950;
+  --green-dim: rgba(63,185,80,0.13);
+  --red: #f85149;
+  --red-dim: rgba(248,81,73,0.13);
+  --blue: #58a6ff;
+  --blue-dim: rgba(88,166,255,0.12);
+  --purple: #bc8cff;
+  --purple-dim: rgba(188,140,255,0.12);
+  --yellow: #d29922;
+  --yellow-dim: rgba(210,153,34,0.13);
+  --radius: 10px;
+  --radius-sm: 7px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; }
+
+/* NAV */
+.topnav { background: var(--bg2); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 0 16px; }
+.topnav-inner { display: flex; align-items: center; gap: 10px; max-width: 820px; margin: 0 auto; height: 54px; }
+.aws-badge { background: var(--aws-orange); color: #000; font-weight: 700; font-size: 11px; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; white-space: nowrap; }
+.logo-text { font-size: 13px; font-weight: 600; }
+.logo-sub { font-size: 11px; color: var(--text2); }
+.nav-tabs { display: flex; gap: 4px; margin-left: auto; }
+.nav-tab { padding: 5px 13px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid transparent; background: none; color: var(--text2); transition: all 0.15s; font-family: inherit; }
+.nav-tab.active { background: var(--aws-orange-dim); color: var(--aws-orange); border-color: rgba(255,153,0,0.3); }
+.nav-tab:hover:not(.active) { background: var(--bg3); color: var(--text); }
+
+/* SCREENS */
+.screen { display: none; max-width: 820px; margin: 0 auto; padding: 20px 16px 40px; }
+.screen.active { display: block; }
+
+/* CARDS */
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 14px; }
+.card-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.card-sub { font-size: 12px; color: var(--text2); margin-bottom: 14px; }
+
+/* HERO */
+.hero { background: linear-gradient(135deg, #1a1200 0%, var(--bg2) 60%); border: 1px solid rgba(255,153,0,0.2); border-radius: var(--radius); padding: 22px; margin-bottom: 14px; }
+.hero-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+.hero-icon { font-size: 36px; line-height: 1; }
+.hero h1 { font-size: 17px; font-weight: 700; margin-bottom: 5px; }
+.hero p { font-size: 13px; color: var(--text2); line-height: 1.5; }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.hero-tag { background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 11px; color: var(--text2); }
+.hero-tag.orange { background: var(--aws-orange-dim); border-color: rgba(255,153,0,0.3); color: var(--aws-orange); }
+
+/* SCORING INFO */
+.scoring-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.scoring-row:last-child { border-bottom: none; }
+.scoring-label { color: var(--text2); }
+.scoring-val { font-weight: 500; color: var(--text); }
+
+/* DOMAIN TABLE */
+.domain-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.domain-row:last-child { border-bottom: none; }
+.domain-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.domain-name { flex: 1; color: var(--text); }
+.domain-pct { color: var(--text2); font-size: 12px; white-space: nowrap; }
+.domain-bar-wrap { width: 70px; height: 4px; background: var(--bg4); border-radius: 2px; flex-shrink: 0; }
+.domain-bar { height: 4px; border-radius: 2px; }
+
+/* CHIPS */
+.section-label { font-size: 12px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); transition: all 0.15s; user-select: none; }
+.chip.selected { background: var(--aws-orange-dim); border-color: rgba(255,153,0,0.4); color: var(--aws-orange); }
+.chip:hover:not(.selected) { border-color: var(--border2); color: var(--text); }
+
+/* BUTTON */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 11px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; font-family: inherit; }
+.btn-primary { background: var(--aws-orange); color: #000; width: 100%; margin-top: 16px; }
+.btn-primary:hover { background: var(--aws-orange-dark); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-outline { background: none; border: 1px solid var(--border); color: var(--text2); }
+.btn-outline:hover { border-color: var(--border2); color: var(--text); }
+.btn-ghost { background: none; border: none; color: var(--text2); font-size: 13px; padding: 7px 12px; cursor: pointer; border-radius: var(--radius-sm); font-family: inherit; }
+.btn-ghost:hover { background: var(--bg3); color: var(--text); }
+
+/* EXAM SCREEN */
+.exam-topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 10px 16px; position: sticky; top: 54px; z-index: 50; }
+.exam-topbar-inner { display: flex; align-items: center; gap: 10px; max-width: 820px; margin: 0 auto; }
+.exam-progress-wrap { flex: 1; }
+.exam-progress-text { font-size: 12px; color: var(--text2); margin-bottom: 5px; display: flex; justify-content: space-between; }
+.exam-progress-bar { height: 4px; background: var(--bg4); border-radius: 2px; overflow: hidden; }
+.exam-progress-fill { height: 4px; background: var(--aws-orange); border-radius: 2px; transition: width 0.3s; }
+.timer-badge { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 5px 10px; font-size: 13px; font-weight: 600; font-family: monospace; color: var(--aws-orange); white-space: nowrap; }
+.timer-badge.warning { color: var(--red); border-color: rgba(248,81,73,0.3); background: var(--red-dim); }
+
+.q-block { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
+.q-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.q-num { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; }
+.q-domain-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+.q-text { font-size: 15px; line-height: 1.6; color: var(--text); margin-bottom: 16px; }
+.q-scenario { background: var(--bg3); border-left: 3px solid var(--aws-orange); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 14px; font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
+
+.options { display: flex; flex-direction: column; gap: 8px; }
+.option { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg3); cursor: pointer; transition: all 0.15s; }
+.option:hover { border-color: var(--border2); background: var(--bg4); }
+.option.selected { border-color: rgba(255,153,0,0.5); background: var(--aws-orange-dim); }
+.option.correct { border-color: var(--green); background: var(--green-dim); }
+.option.incorrect { border-color: var(--red); background: var(--red-dim); }
+.option.reveal-correct { border-color: var(--green); background: var(--green-dim); }
+.opt-letter { width: 22px; height: 22px; min-width: 22px; border-radius: 50%; border: 1.5px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--text2); }
+.option.selected .opt-letter { border-color: var(--aws-orange); background: var(--aws-orange-dim); color: var(--aws-orange); }
+.option.correct .opt-letter { border-color: var(--green); background: var(--green-dim); color: var(--green); }
+.option.incorrect .opt-letter { border-color: var(--red); background: var(--red-dim); color: var(--red); }
+.option.reveal-correct .opt-letter { border-color: var(--green); background: var(--green-dim); color: var(--green); }
+.opt-text { font-size: 14px; line-height: 1.5; color: var(--text); }
+
+.explanation { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius-sm); padding: 12px 14px; margin-top: 12px; font-size: 13px; color: var(--text2); line-height: 1.6; }
+.explanation strong { color: var(--text); }
+
+.nav-row { display: flex; gap: 8px; justify-content: space-between; align-items: center; margin-top: 8px; }
+.q-flag { background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 12px; font-size: 12px; cursor: pointer; color: var(--text2); font-family: inherit; transition: all 0.15s; }
+.q-flag.flagged { border-color: rgba(210,153,34,0.4); background: var(--yellow-dim); color: var(--yellow); }
+
+/* SCORE SCREEN */
+.score-screen { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.score-hero { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 14px; text-align: center; }
+.score-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text2); margin-bottom: 10px; }
+.score-value { font-size: 64px; font-weight: 700; line-height: 1; margin-bottom: 6px; font-family: monospace; }
+.score-value.pass { color: var(--green); }
+.score-value.fail { color: var(--red); }
+.score-verdict { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+.score-verdict.pass { background: var(--green-dim); color: var(--green); }
+.score-verdict.fail { background: var(--red-dim); color: var(--red); }
+.score-stats { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.score-stat { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 16px; text-align: center; min-width: 100px; }
+.score-stat-val { font-size: 20px; font-weight: 700; }
+.score-stat-lbl { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.domain-result { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.domain-result:last-child { border-bottom: none; }
+.domain-result-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.domain-result-name { flex: 1; font-size: 13px; }
+.domain-result-bar-wrap { width: 80px; height: 6px; background: var(--bg4); border-radius: 3px; }
+.domain-result-bar { height: 6px; border-radius: 3px; transition: width 0.6s ease; }
+.domain-result-pct { font-size: 12px; font-weight: 600; width: 36px; text-align: right; }
+
+/* HISTORY */
+.history-empty { text-align: center; padding: 48px 20px; color: var(--text2); font-size: 14px; }
+.history-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+.history-score { font-size: 22px; font-weight: 700; min-width: 54px; font-family: monospace; }
+.history-score.pass { color: var(--green); }
+.history-score.fail { color: var(--red); }
+.history-meta { flex: 1; }
+.history-date { font-size: 12px; color: var(--text2); }
+.history-detail { font-size: 13px; color: var(--text); margin-top: 2px; }
+.history-verdict { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+.history-verdict.pass { background: var(--green-dim); color: var(--green); }
+.history-verdict.fail { background: var(--red-dim); color: var(--red); }
+
+/* STUDY TAB */
+.study-domain-btn { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.15s; width: 100%; text-align: left; font-family: inherit; }
+.study-domain-btn:hover { border-color: var(--border2); background: var(--bg3); }
+.study-domain-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.study-domain-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.study-domain-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.study-domain-arrow { margin-left: auto; color: var(--text3); font-size: 16px; }
+
+/* FLASHCARD */
+.flashcard { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 22px; margin-bottom: 14px; min-height: 200px; display: flex; flex-direction: column; justify-content: center; cursor: pointer; user-select: none; transition: all 0.2s; }
+.flashcard:hover { border-color: var(--border2); }
+.flashcard.flipped { border-color: rgba(255,153,0,0.3); background: linear-gradient(135deg, #1a1200 0%, var(--bg2) 100%); }
+.flashcard-hint { font-size: 11px; color: var(--text3); text-align: center; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.flashcard-q { font-size: 16px; font-weight: 500; line-height: 1.6; text-align: center; }
+.flashcard-a { font-size: 14px; color: var(--aws-orange); line-height: 1.6; text-align: center; display: none; margin-top: 12px; }
+.flashcard.flipped .flashcard-a { display: block; }
+.flashcard.flipped .flashcard-hint { color: var(--aws-orange); }
+
+/* MISC */
+.divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+.unscored-notice { background: var(--yellow-dim); border: 1px solid rgba(210,153,34,0.25); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 12px; color: var(--yellow); margin-top: 8px; }
+
+@media (max-width: 480px) {
+  .score-value { font-size: 48px; }
+  .score-stats { gap: 6px; }
+  .score-stat { min-width: 80px; padding: 8px 10px; }
+  .hero h1 { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="aws-badge">AWS</div>
+      <div>
+        <div class="logo-text">AI Practitioner</div>
+        <div class="logo-sub">AIF-C01 Practice Exam</div>
+      </div>
+    </div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showTab('home')">Home</button>
+      <button class="nav-tab" onclick="showTab('history')">History</button>
+      <button class="nav-tab" onclick="showTab('study')">Study</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HOME TAB -->
+<div id="screen-home" class="screen active">
+  <div class="hero">
+    <div class="hero-top">
+      <div class="hero-icon">&#x1F916;</div>
+      <div>
+        <h1>AWS Certified AI Practitioner (AIF-C01)</h1>
+        <p>Practice with 230+ exam-weighted questions across 5 domains. Scored and unscored simulation, timed exam mode, and per-domain analysis.</p>
+      </div>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag orange">Scaled Score 100-1,000</span>
+      <span class="hero-tag orange">Passing: 700</span>
+      <span class="hero-tag">Offline Ready</span>
+      <span class="hero-tag">iPhone Optimized</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Exam Scoring Model</div>
+    <div class="card-sub">This practice tool simulates the AIF-C01 scoring structure.</div>
+    <div class="scoring-row"><span class="scoring-label">Total questions (real exam)</span><span class="scoring-val">65</span></div>
+    <div class="scoring-row"><span class="scoring-label">Scored questions</span><span class="scoring-val">50</span></div>
+    <div class="scoring-row"><span class="scoring-label">Unscored (pretest) questions</span><span class="scoring-val">15</span></div>
+    <div class="scoring-row"><span class="scoring-label">Score range</span><span class="scoring-val">100 - 1,000</span></div>
+    <div class="scoring-row"><span class="scoring-label">Passing score</span><span class="scoring-val">700</span></div>
+    <div class="scoring-row"><span class="scoring-label">Guessing penalty</span><span class="scoring-val">None</span></div>
+    <div class="scoring-row"><span class="scoring-label">Time limit</span><span class="scoring-val">90 minutes</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Domain Weighting</div>
+    <div class="card-sub">5 domains with official AWS exam guide percentages.</div>
+    <div id="domain-chart"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Configure Your Session</div>
+    <div class="card-sub">Choose question count, time mode, and domain focus.</div>
+
+    <div class="section-label" style="margin-top:4px;">Number of Questions</div>
+    <div class="chip-group" id="q-count-chips" style="margin-bottom:16px;">
+      <div class="chip" data-val="10" onclick="selChip(this,'qcount')">10</div>
+      <div class="chip selected" data-val="25" onclick="selChip(this,'qcount')">25</div>
+      <div class="chip" data-val="50" onclick="selChip(this,'qcount')">50</div>
+      <div class="chip" data-val="65" onclick="selChip(this,'qcount')">65 (Full)</div>
+    </div>
+
+    <div class="section-label">Timed Mode</div>
+    <div class="chip-group" id="timed-chips" style="margin-bottom:16px;">
+      <div class="chip selected" data-val="off" onclick="selChip(this,'timed')">Untimed</div>
+      <div class="chip" data-val="on" onclick="selChip(this,'timed')">90 min timer</div>
+    </div>
+
+    <div class="section-label">Answer Mode</div>
+    <div class="chip-group" id="answer-chips" style="margin-bottom:16px;">
+      <div class="chip selected" data-val="after" onclick="selChip(this,'answermode')">Reveal after exam</div>
+      <div class="chip" data-val="instant" onclick="selChip(this,'answermode')">Instant feedback</div>
+    </div>
+
+    <div class="section-label">Domain Filter</div>
+    <div class="chip-group" id="domain-chips" style="margin-bottom:4px;">
+      <div class="chip selected" data-val="all" onclick="selDomain(this)">All Domains</div>
+      <div class="chip" data-val="0" onclick="selDomain(this)">D1: AI/ML Fundamentals</div>
+      <div class="chip" data-val="1" onclick="selDomain(this)">D2: Generative AI</div>
+      <div class="chip" data-val="2" onclick="selDomain(this)">D3: Foundation Models</div>
+      <div class="chip" data-val="3" onclick="selDomain(this)">D4: Responsible AI</div>
+      <div class="chip" data-val="4" onclick="selDomain(this)">D5: Security & Governance</div>
+    </div>
+
+    <button class="btn btn-primary" onclick="startExam()">Start Practice Exam</button>
+  </div>
+</div>
+
+<!-- EXAM SCREEN (injected dynamically) -->
+<div id="screen-exam" class="screen"></div>
+
+<!-- SCORE SCREEN -->
+<div id="screen-score" class="screen score-screen"></div>
+
+<!-- HISTORY TAB -->
+<div id="screen-history" class="screen">
+  <h2 style="font-size:17px;font-weight:700;margin-bottom:14px;">Exam History</h2>
+  <div id="history-list"></div>
+</div>
+
+<!-- STUDY TAB -->
+<div id="screen-study" class="screen">
+  <h2 style="font-size:17px;font-weight:700;margin-bottom:6px;">Study Mode</h2>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:16px;">Flashcards and key concepts by domain.</p>
+  <div id="study-domain-list"></div>
+  <div id="study-flashcard-area" style="display:none;"></div>
+</div>
+
+<script>
+var DOMAINS = [
+  { name: "AI and ML Fundamentals", short: "D1", pct: 20, color: "#58a6ff", icon: "&#x1F9E0;" },
+  { name: "Generative AI Fundamentals", short: "D2", pct: 24, color: "#bc8cff", icon: "&#x2728;" },
+  { name: "Applications of Foundation Models", short: "D3", pct: 28, color: "#FF9900", icon: "&#x1F4E1;" },
+  { name: "Guidelines for Responsible AI", short: "D4", pct: 14, color: "#3fb950", icon: "&#x2696;" },
+  { name: "Security, Compliance & Governance", short: "D5", pct: 14, color: "#f85149", icon: "&#x1F512;" }
+];
+
+var QUESTIONS = [
+/* ===== DOMAIN 0: AI AND ML FUNDAMENTALS (20%) ===== */
+{d:0,q:"A company wants to automatically detect fraudulent credit card transactions by learning patterns from millions of historical transactions. Which approach is most appropriate?",o:["Build a rule-based system with manually written fraud conditions","Apply a supervised machine learning model trained on labeled historical data","Use unsupervised clustering to group all transactions randomly","Manually review each transaction before it processes"],a:1,e:"Supervised machine learning is the right fit here. Historical transactions are already labeled as fraudulent or legitimate, making this a classification problem. Supervised models learn the pattern boundary from labeled examples, enabling scalable automated detection."},
+{d:0,q:"Which of the following is the BEST example of a regression task in machine learning?",o:["Classifying email messages as spam or not spam","Predicting the selling price of a house given its features","Grouping customers by purchase behavior without labels","Detecting whether an image contains a cat"],a:1,e:"Regression predicts a continuous numeric value. Predicting house price is a continuous output problem. Spam detection and image classification are classification tasks; customer grouping without labels is clustering (unsupervised)."},
+{d:0,q:"A data scientist notices her model achieves 99% accuracy on training data but only 62% on new data. What is most likely occurring?",o:["The model is underfitting the training data","The training dataset is too small to be valid","The model is overfitting by memorizing training examples","The evaluation metric is inappropriate for this task"],a:2,e:"Overfitting means the model learned the training data too specifically, including its noise and irrelevant patterns, so it fails to generalize to unseen data. The large gap between training accuracy (99%) and test accuracy (62%) is a classic overfitting signal."},
+{d:0,q:"Which AWS service is purpose-built to help data scientists and ML engineers build, train, and deploy machine learning models at scale?",o:["AWS Lambda","Amazon SageMaker","Amazon Comprehend","AWS Glue"],a:1,e:"Amazon SageMaker is AWS's fully managed end-to-end ML platform. It covers the entire ML lifecycle: data labeling, feature engineering, model training, hyperparameter tuning, deployment, and monitoring. The others are specialized services (Lambda is serverless compute, Comprehend is NLP, Glue is data preparation)."},
+{d:0,q:"A team wants to identify natural groupings in customer purchase data without any pre-defined categories. Which ML technique is appropriate?",o:["Supervised classification","Linear regression","Unsupervised clustering","Reinforcement learning"],a:2,e:"When you have no labeled target variable and want to discover inherent structure in data, unsupervised clustering (e.g., k-means) is the right approach. Supervised classification and regression require labeled data; reinforcement learning requires an agent-environment interaction loop."},
+{d:0,q:"Which term describes the process of feeding model predictions back into itself over multiple steps, such as generating a story one word at a time?",o:["Batch inference","Autoregressive generation","Online learning","Transfer learning"],a:1,e:"Autoregressive generation means the model produces one output token at a time, then feeds that token back as input to generate the next token. Large language models and image generation models use this approach to produce coherent, sequential outputs."},
+{d:0,q:"A retail company wants to recommend products to customers based on the ratings other similar customers have given. This is an example of what ML technique?",o:["Content-based filtering","Collaborative filtering","Anomaly detection","Time-series forecasting"],a:1,e:"Collaborative filtering generates recommendations by finding users with similar preferences and recommending items those users liked. Content-based filtering uses item attributes instead. The key phrase 'similar customers' signals collaborative filtering."},
+{d:0,q:"What is the purpose of a training/test split in machine learning?",o:["To increase the total size of available training data","To evaluate model generalization on data it has not seen before","To reduce the computational cost of model training","To balance the class distribution in the dataset"],a:1,e:"Holding out a test set that the model never sees during training allows you to measure how well the model will perform on new, real-world data. Without a test split, you cannot detect overfitting, which would lead to false confidence in model performance."},
+{d:0,q:"Which of the following BEST describes the difference between AI and machine learning?",o:["AI and ML are identical terms with no distinction","ML is a subset of AI that learns patterns from data automatically","AI only applies to robotics while ML applies to software","ML requires human-labeled data while AI does not"],a:1,e:"Artificial Intelligence is the broader discipline of creating systems that simulate human intelligence. Machine Learning is a specific subset of AI where systems improve automatically through experience (data) without being explicitly programmed for each task. Not all AI is ML, but all ML is AI."},
+{d:0,q:"Amazon Rekognition is primarily used for which type of AI task?",o:["Natural language processing and translation","Computer vision including object detection and facial analysis","Time-series anomaly detection","Tabular data classification"],a:1,e:"Amazon Rekognition is AWS's computer vision service. It analyzes images and video for object detection, facial recognition, scene understanding, text extraction, content moderation, and more. For NLP, AWS offers Comprehend and Bedrock; for time-series anomaly detection, Lookout for Metrics."},
+{d:0,q:"A model trained on medical data from US hospitals is deployed in a country with different patient demographics and achieves poor performance. What is the primary cause?",o:["The model was not trained with enough compute resources","Distribution shift between training and deployment populations","The evaluation metric used during training was incorrect","The model architecture is not compatible with the new environment"],a:1,e:"Distribution shift (also called dataset shift or covariate shift) occurs when the statistical properties of input data at deployment differ from those seen during training. Here, different patient demographics mean the new data comes from a different distribution than what the model learned from."},
+{d:0,q:"Which metric would be MOST important when evaluating a medical screening model where missing a positive case (disease present) is far more costly than a false alarm?",o:["Accuracy","Precision","Recall","F1 Score"],a:2,e:"Recall (sensitivity) measures the proportion of actual positives correctly identified. In high-stakes screening where false negatives are dangerous, maximizing recall ensures the model catches as many true cases as possible, even at the cost of more false alarms. Precision focuses on minimizing false positives, which is the opposite priority here."},
+{d:0,q:"What is feature engineering in the context of machine learning?",o:["The process of selecting which ML algorithm to use","Transforming or creating input variables to improve model performance","Adjusting model weights during the training process","Deploying a trained model to a production environment"],a:1,e:"Feature engineering involves transforming raw data into informative input variables (features) that make it easier for a model to learn underlying patterns. Examples include creating date components from a timestamp, normalizing values, or encoding categorical variables. It is distinct from training and deployment."},
+{d:0,q:"Which AWS service provides pre-built AI capabilities for tasks like speech-to-text, text-to-speech, and translation without requiring custom model training?",o:["Amazon SageMaker","Amazon Polly, Transcribe, and Translate","Amazon Lookout for Metrics","AWS DeepRacer"],a:1,e:"Amazon Polly (text-to-speech), Amazon Transcribe (speech-to-text), and Amazon Translate are pre-built AI services accessible via API. They require no ML expertise or training data from the developer. SageMaker is for building custom models; Lookout for Metrics is for anomaly detection."},
+{d:0,q:"A machine learning model is said to have high bias. What does this typically indicate?",o:["The model is too complex and overfits training data","The model is too simple and fails to capture patterns in the data","The training data contains incorrect labels","The model was trained for too many iterations"],a:1,e:"High bias (underfitting) means the model is too simple to capture the true patterns in the data, resulting in poor performance on both training and test sets. This is the opposite of overfitting (high variance), where the model is too complex. Simplistic linear models on complex data often exhibit high bias."},
+{d:0,q:"Which type of machine learning involves an agent learning to take actions in an environment to maximize a cumulative reward signal?",o:["Supervised learning","Unsupervised learning","Reinforcement learning","Transfer learning"],a:2,e:"Reinforcement learning (RL) models an agent interacting with an environment, taking actions, and receiving reward or penalty signals. The agent learns a policy that maximizes long-term cumulative reward. AWS DeepRacer is an RL example. Supervised and unsupervised learning use static datasets rather than interactive environments."},
+{d:0,q:"What does a confusion matrix primarily help evaluate?",o:["The computational efficiency of a training algorithm","The performance of a classification model by showing true vs. predicted class counts","The convergence speed of gradient descent","The storage requirements of a deep learning model"],a:1,e:"A confusion matrix displays the counts of true positives, true negatives, false positives, and false negatives for a classification model. From it you can compute accuracy, precision, recall, F1, and other classification metrics to understand where the model is making errors."},
+{d:0,q:"A company has structured customer data in a CSV file and wants to build a model to predict customer churn. Which Amazon SageMaker feature is specifically designed to automatically try multiple ML algorithms and hyperparameters to find the best model?",o:["SageMaker Model Monitor","SageMaker Autopilot","SageMaker Feature Store","SageMaker Ground Truth"],a:1,e:"SageMaker Autopilot is AWS's AutoML capability. Given a dataset and target column, it automatically performs data preprocessing, algorithm selection, hyperparameter optimization, and model evaluation, providing the best-performing model with full transparency. Model Monitor detects drift; Feature Store manages features; Ground Truth handles labeling."},
+{d:0,q:"What is transfer learning?",o:["Moving a trained model from one cloud region to another","Applying knowledge learned from one task or domain to improve learning on a different but related task","Transferring data from on-premises storage to an S3 bucket","Sharing model weights between multiple users in a team"],a:1,e:"Transfer learning leverages weights and representations a model learned on a large source task (e.g., ImageNet classification or language modeling) and adapts them for a new, related target task with less data. It dramatically reduces training time and data requirements, and is the foundation of fine-tuning large language models."},
+{d:0,q:"Which of the following is an example of structured data that is commonly used in traditional machine learning?",o:["A collection of audio recordings of customer service calls","A set of customer reviews written in free text","A database table of customer transactions with numeric and categorical columns","A repository of product images with bounding box annotations"],a:2,e:"Structured data is organized in rows and columns with defined data types, such as a database table or spreadsheet. Audio recordings are unstructured; free text reviews are unstructured text; image datasets are unstructured. Traditional ML algorithms like decision trees and logistic regression work best with structured tabular data."},
+{d:0,q:"What does Amazon Kendra provide?",o:["A managed Kubernetes service for deploying ML models","An intelligent enterprise search service powered by ML","A feature store for managing ML training features","A managed environment for running data ETL jobs"],a:1,e:"Amazon Kendra is an intelligent enterprise search service that uses ML to understand natural language queries and retrieve relevant answers from organizational documents and data sources. It differs from traditional keyword search by understanding semantic meaning and context."},
+{d:0,q:"A company wants to forecast daily demand for 500 products across 50 stores for the next 90 days. Which Amazon service is purpose-built for this type of time-series forecasting problem?",o:["Amazon Comprehend","Amazon Forecast","Amazon Personalize","Amazon Polly"],a:1,e:"Amazon Forecast is AWS's managed time-series forecasting service. It uses ML to generate probabilistic predictions and handles multiple related time series, categorical features, and related datasets. Comprehend does NLP; Personalize does recommendations; Polly is text-to-speech."},
+{d:0,q:"Which statement accurately describes the difference between supervised and unsupervised learning?",o:["Supervised learning uses more data than unsupervised learning","In supervised learning the training data includes labeled target outputs; unsupervised learning finds patterns without labeled targets","Supervised learning is always more accurate than unsupervised learning","Unsupervised learning always requires more compute than supervised learning"],a:1,e:"The defining distinction is the presence of labels. Supervised learning trains on (input, label) pairs to predict outputs. Unsupervised learning discovers inherent structure in unlabeled data, such as clusters or latent representations. Neither is universally more accurate or computationally expensive."},
+{d:0,q:"What is the primary purpose of Amazon SageMaker Ground Truth?",o:["Deploying trained models to real-time inference endpoints","Automating hyperparameter tuning across multiple training runs","Managing high-quality training data labeling workflows using human labelers and automation","Monitoring deployed models for data drift and quality issues"],a:2,e:"SageMaker Ground Truth is a data labeling service that combines human labelers (from Mechanical Turk, third-party vendors, or your own workforce) with active learning to automatically label high-confidence examples. It produces labeled datasets efficiently and cost-effectively for supervised learning tasks."},
+{d:0,q:"A batch inference job processes 1 million records overnight to generate predictions stored in S3. Which Amazon SageMaker feature is MOST appropriate for this use case?",o:["Real-time inference endpoints","SageMaker Batch Transform","SageMaker Feature Store","SageMaker Pipelines"],a:1,e:"SageMaker Batch Transform is designed for offline, large-scale inference on datasets stored in S3. It provisions compute, runs predictions, and stores results without requiring a persistent endpoint. Real-time endpoints are for low-latency live requests; Feature Store manages features; Pipelines orchestrates ML workflows."},
+
+/* ===== DOMAIN 1: GENERATIVE AI FUNDAMENTALS (24%) ===== */
+{d:1,q:"Which of the following BEST describes a large language model (LLM)?",o:["A database that stores large volumes of natural language text","A neural network trained on massive text datasets to understand and generate human language","A rule-based system that matches input patterns to predefined text responses","A search engine index optimized for semantic queries"],a:1,e:"A large language model is a deep neural network (typically transformer-based) trained on enormous text corpora using self-supervised objectives. Through this training it develops the ability to understand, generate, summarize, translate, and reason about natural language."},
+{d:1,q:"What does 'temperature' control in a generative AI model?",o:["The speed at which the model generates tokens","The randomness or creativity of the model's output","The maximum number of tokens the model can produce","The cost per API call to the model"],a:1,e:"Temperature is a sampling parameter that scales the probability distribution over output tokens. Higher temperature (e.g., 1.5) increases randomness and diversity; lower temperature (e.g., 0.2) makes outputs more deterministic and focused. Temperature = 0 produces the highest-probability token at every step."},
+{d:1,q:"What is 'hallucination' in the context of generative AI?",o:["When a model refuses to answer a question for safety reasons","When a model generates confident-sounding but factually incorrect or fabricated information","When a model takes longer than expected to generate a response","When a model repeats the same sentence multiple times in a response"],a:1,e:"Hallucination refers to generative AI outputs that sound plausible and confident but contain fabricated facts, false citations, incorrect data, or invented details. It is a known limitation arising from the model optimizing for linguistic fluency rather than factual accuracy."},
+{d:1,q:"A developer wants to guide a generative AI model to always respond in a specific persona and format without changing the model weights. Which technique should they use?",o:["Fine-tuning the model on custom data","Adjusting the model temperature to 0","Writing a detailed system prompt with instructions and examples","Increasing the model context window size"],a:2,e:"Prompt engineering (including system prompts) allows you to steer model behavior through instructions, examples, and constraints without modifying model weights. Fine-tuning requires training; temperature affects randomness not persona; context window size affects how much text the model can process."},
+{d:1,q:"What is the primary purpose of Amazon Bedrock?",o:["Providing a managed Kubernetes environment for deploying containerized ML pipelines","Offering API access to multiple foundation models from AWS and third-party providers without managing infrastructure","A service for building custom ML models from scratch using AWS GPU clusters","A data catalog service for discovering and managing enterprise datasets"],a:1,e:"Amazon Bedrock is a fully managed service that provides API access to a variety of foundation models from AWS (e.g., Amazon Titan) and third-party providers (e.g., Anthropic Claude, Meta Llama, Cohere, Mistral) without needing to manage underlying infrastructure or train models."},
+{d:1,q:"Which of the following BEST describes a 'foundation model'?",o:["A small specialized model trained on domain-specific data for a single task","A large pre-trained model that can be adapted to a wide range of downstream tasks","A model that only performs image classification tasks","A rule-based expert system trained on curated domain knowledge"],a:1,e:"Foundation models are large models pre-trained on broad data at scale that can be adapted (fine-tuned or prompted) for many downstream tasks. The term was introduced to capture models like GPT, DALL-E, and Stable Diffusion, which serve as a foundation for diverse applications."},
+{d:1,q:"What does 'context window' refer to in a large language model?",o:["The graphical user interface used to enter prompts","The maximum number of tokens (input and output) the model can consider in a single interaction","The geographic region where the model is hosted","The number of training examples used during fine-tuning"],a:1,e:"The context window defines the maximum token length (input prompt + generated output combined) that a model can process at one time. It limits how much conversational history, document content, or instructions can be provided. Larger context windows allow processing longer documents but require more memory and compute."},
+{d:1,q:"A company wants to generate AI responses that are grounded in its proprietary knowledge base without retraining the model. Which approach is MOST appropriate?",o:["Increase the model context window length","Use retrieval-augmented generation (RAG) to inject relevant documents into the prompt","Apply prompt compression to reduce token usage","Switch to a smaller, more specialized model"],a:1,e:"Retrieval-augmented generation (RAG) dynamically retrieves relevant context from a knowledge base and injects it into the prompt. This grounds the model's response in current, proprietary information without the cost and complexity of retraining or fine-tuning. It also reduces hallucination by providing factual source material."},
+{d:1,q:"Which technique involves updating a pre-trained model's weights using a smaller, task-specific dataset to improve performance on a particular domain?",o:["Prompt engineering","Retrieval-augmented generation","Fine-tuning","Zero-shot prompting"],a:2,e:"Fine-tuning adjusts the model's internal weights by continuing training on a curated, domain-specific dataset. This teaches the model new styles, terminology, or behaviors that prompt engineering alone cannot achieve. Prompt engineering changes inputs without touching weights; RAG retrieves external context at inference time."},
+{d:1,q:"What is the primary role of the 'system prompt' in Amazon Bedrock and other LLM API interactions?",o:["To set the inference compute instance size","To provide persistent instructions, persona, and constraints that govern model behavior across all user turns","To specify the billing account for API usage","To determine the output token limit for the session"],a:1,e:"The system prompt (sometimes called a system message) is a pre-conversation instruction set that establishes the model's role, persona, constraints, output format requirements, and ground rules. It persists throughout the conversation and shapes how the model responds to all subsequent user messages."},
+{d:1,q:"Which metric is commonly used to evaluate the quality of text generated by a language model by comparing it to human reference text using n-gram overlap?",o:["RMSE (Root Mean Squared Error)","BLEU (Bilingual Evaluation Understudy)","AUC-ROC","F1 Score"],a:1,e:"BLEU (Bilingual Evaluation Understudy) measures the overlap of n-grams (sequences of words) between machine-generated text and reference human-written text. It was originally developed for machine translation evaluation and is widely used for any text generation quality assessment. RMSE and AUC-ROC are for regression and classification tasks respectively."},
+{d:1,q:"A user provides an AI model with a task description and several input-output examples before asking the model to perform a new instance of the task. What prompting technique is this?",o:["Zero-shot prompting","One-shot prompting","Few-shot prompting","Chain-of-thought prompting"],a:2,e:"Few-shot prompting provides multiple examples (shots) of the desired input-output pattern within the prompt to show the model the format and logic to apply. Zero-shot provides no examples; one-shot provides exactly one example; chain-of-thought prompts the model to reason step-by-step."},
+{d:1,q:"What does 'top-p sampling' (nucleus sampling) control when generating text with an LLM?",o:["The probability that the model will refuse to answer","The size of the vocabulary subset from which tokens are sampled based on cumulative probability","The maximum response length in tokens","The batch size used during model inference"],a:1,e:"Top-p (nucleus) sampling selects the smallest set of tokens whose cumulative probability exceeds p, then samples from that subset. For example, with top-p=0.9 the model considers only the tokens that together account for 90% of probability mass. This balances diversity and coherence better than fixed top-k in many scenarios."},
+{d:1,q:"Which Amazon Bedrock capability allows you to automatically retrieve relevant information from a connected data source and include it in model prompts?",o:["Bedrock Model Evaluation","Bedrock Knowledge Bases","Bedrock Guardrails","Bedrock Model Customization"],a:1,e:"Amazon Bedrock Knowledge Bases is a fully managed RAG feature. You connect your data sources (S3, databases), and Bedrock automatically handles embedding, indexing, and retrieval at inference time, injecting relevant chunks into the model prompt. Guardrails handles safety policies; Model Customization handles fine-tuning."},
+{d:1,q:"A generative AI model is asked to write a product description but responds with content that violates company policy. Which Amazon Bedrock feature is designed to prevent this?",o:["Amazon Bedrock Knowledge Bases","Amazon Bedrock Agents","Amazon Bedrock Guardrails","Amazon Bedrock Model Evaluation"],a:2,e:"Amazon Bedrock Guardrails lets you define policies to filter undesirable content, block specific topics, redact sensitive information, and detect hallucinations. Guardrails are applied at inference time to both the input prompt and model output. Agents orchestrate multi-step tasks; Knowledge Bases handle RAG; Model Evaluation measures quality."},
+{d:1,q:"What is the key advantage of using Amazon Bedrock compared to building your own LLM infrastructure from scratch?",o:["Bedrock models always produce more accurate responses than self-hosted models","Bedrock eliminates the need to provision, manage, or scale underlying compute infrastructure for foundation models","Bedrock models cannot be customized, ensuring consistent outputs","Bedrock is free with no usage costs for all AWS customers"],a:1,e:"Amazon Bedrock is a fully managed serverless service. You access foundation models via API without provisioning GPU instances, managing software stacks, or handling scaling. This dramatically reduces operational complexity, time-to-market, and total cost compared to self-managed LLM infrastructure."},
+{d:1,q:"Which of the following BEST describes 'prompt injection' as a security concern in generative AI applications?",o:["When a prompt is too long to fit in the model context window","When malicious input in a user message attempts to override system instructions or manipulate model behavior","When a developer accidentally sends the wrong prompt to the model API","When the model fails to follow the instructions given in the system prompt"],a:1,e:"Prompt injection is an attack where malicious text embedded in user input or external content overrides system instructions, causing the model to behave in unintended ways (e.g., ignoring safety rules, leaking data, or taking unauthorized actions). It is a critical security concern for AI applications that process untrusted input."},
+{d:1,q:"A model generates a detailed, confident medical diagnosis for a user based on self-reported symptoms. The diagnosis is completely fabricated. What risk does this scenario illustrate?",o:["Model bias","Hallucination risk in high-stakes domains","Prompt injection attack","Lack of fine-tuning"],a:1,e:"This illustrates the danger of hallucination in high-stakes domains like medicine, law, and finance. The model generates plausible-sounding but fabricated information with high confidence, which could lead to real harm if users act on it. Mitigations include RAG grounding, human review, and explicit disclaimers."},
+{d:1,q:"What is 'embeddings' in the context of generative AI and semantic search?",o:["The process of training a model on a large text corpus","Dense numerical vector representations of text that capture semantic meaning","The model's attention mechanism for processing long sequences","The output probability distribution over the vocabulary at each step"],a:1,e:"Embeddings are fixed-length numerical vectors that encode semantic meaning of words, sentences, or documents. Semantically similar text produces vectors that are close in vector space. Embeddings are essential for semantic search, RAG retrieval, similarity detection, and clustering tasks."},
+{d:1,q:"Which AWS service provides vector storage and similarity search capabilities commonly used in RAG architectures?",o:["Amazon DynamoDB","Amazon Aurora with pgvector or Amazon OpenSearch Service with vector search","Amazon S3","Amazon Redshift"],a:1,e:"For RAG, you need a vector database to store embeddings and run similarity searches. Amazon OpenSearch Service and Amazon Aurora PostgreSQL (with pgvector extension) both support vector search. Amazon Bedrock Knowledge Bases also manages this automatically. DynamoDB, S3, and Redshift are not optimized for vector similarity search."},
+{d:1,q:"A developer wants a foundation model to break down a complex math word problem step by step before giving the final answer. Which prompting strategy helps most?",o:["Zero-shot prompting","Reducing the temperature to near zero","Chain-of-thought prompting","Top-p sampling set to 1.0"],a:2,e:"Chain-of-thought (CoT) prompting instructs or encourages the model to reason through intermediate steps before reaching a conclusion. This significantly improves performance on multi-step reasoning, math, and logic tasks by forcing the model to decompose the problem rather than jump directly to an answer."},
+{d:1,q:"What is the purpose of Amazon Bedrock Agents?",o:["Training custom foundation models on proprietary datasets","Orchestrating multi-step tasks by having a model take actions, call APIs, and reason through a goal iteratively","Providing human labeling for fine-tuning datasets","Evaluating the quality of foundation model outputs"],a:1,e:"Amazon Bedrock Agents enables agentic AI workflows where a foundation model orchestrates a sequence of steps: reasoning about a goal, selecting and calling tools or APIs, processing results, and iterating until the task is complete. This is how AI assistants can book travel, query databases, or manage workflows autonomously."},
+{d:1,q:"A content platform wants to generate product images from text descriptions. Which type of generative AI model is MOST relevant?",o:["A large language model trained on text corpora","A diffusion-based text-to-image model such as Amazon Titan Image Generator","A recommendation system trained on user behavior","A time-series forecasting model"],a:1,e:"Text-to-image generation is handled by generative image models, typically diffusion models. Amazon Titan Image Generator on Bedrock and models like Stable Diffusion generate images from text descriptions. LLMs generate text; recommendation systems suggest items; time-series models predict sequential numeric data."},
+{d:1,q:"What is the significance of the 'number of parameters' when comparing foundation models?",o:["It determines the geographic region where the model is deployed","It is an indicator of model capacity, generally correlating with capability but also with compute and cost requirements","It specifies the number of API calls the model can handle per second","It controls the maximum number of concurrent users of the model"],a:1,e:"The number of parameters (weights) in a neural network indicates its capacity to learn complex patterns. Larger models (more parameters) generally have greater capability but require substantially more compute for training and inference, resulting in higher costs and latency. The right model size involves balancing capability with cost and speed requirements."},
+{d:1,q:"Which approach helps reduce the risk of a generative AI model generating outdated information?",o:["Increasing the temperature parameter","Using retrieval-augmented generation to supply current documents at inference time","Reducing the context window size","Switching from a transformer to an LSTM architecture"],a:1,e:"A model's knowledge is frozen at its training cutoff date. RAG addresses this by retrieving current documents from a live knowledge base and injecting them into the prompt at inference time, ensuring responses are grounded in up-to-date information without retraining the model."},
+
+/* ===== DOMAIN 2: APPLICATIONS OF FOUNDATION MODELS (28%) ===== */
+{d:2,q:"A company has internal HR documents and policies stored in S3. Employees want to ask questions about these policies in natural language and get accurate answers. Which architecture is MOST appropriate?",o:["Train a new LLM from scratch on the HR document corpus","Implement a RAG pipeline using Amazon Bedrock Knowledge Bases connected to the S3 documents","Use Amazon Polly to convert the HR documents to audio","Deploy a standard SQL query interface to the S3 bucket"],a:1,e:"RAG with Bedrock Knowledge Bases is ideal here. The documents are indexed, and when a question is asked, relevant passages are retrieved and injected into the prompt to generate a grounded answer. Training from scratch is prohibitively expensive; Polly converts text to speech; SQL queries require structured data."},
+{d:2,q:"Which Amazon Bedrock feature allows developers to evaluate the quality and accuracy of different foundation model outputs for a given task?",o:["Bedrock Guardrails","Bedrock Agents","Bedrock Model Evaluation","Bedrock Knowledge Bases"],a:2,e:"Amazon Bedrock Model Evaluation enables you to run automated evaluations (using built-in metrics or custom human evaluations) to compare the quality, accuracy, and safety of different foundation model outputs on your specific use cases. This helps you choose the right model for your application."},
+{d:2,q:"A developer needs the AI model to call external APIs (such as a weather service or database lookup) during inference to answer user questions. Which pattern should they use?",o:["Fine-tuning the model with example API responses","Using prompt engineering to simulate API responses","Using Amazon Bedrock Agents with defined action groups and API schemas","Increasing the context window to hold all possible API responses"],a:2,e:"Bedrock Agents supports tool use / function calling. You define action groups with API schemas (OpenAPI format), and the agent model decides when to call which API, processes the response, and uses the result to formulate a final answer. Fine-tuning teaches new knowledge but cannot make live API calls at inference time."},
+{d:2,q:"An enterprise is building a customer service chatbot that must only discuss topics related to the company's products and refuse off-topic requests. Which Amazon Bedrock feature enforces this content boundary?",o:["Amazon Bedrock Agents","Amazon Bedrock Knowledge Bases","Amazon Bedrock Guardrails with topic denial policies","Amazon Bedrock Model Evaluation"],a:2,e:"Bedrock Guardrails allows you to define denied topics that the model should refuse to discuss. When a user asks about a blocked topic, the guardrail intercepts the request and returns a configured refusal message. This is applied at the infrastructure level, not solely relying on prompt instructions which can be bypassed."},
+{d:2,q:"A legal firm wants to use a foundation model to summarize long case documents (up to 200 pages) accurately. What is the most important model capability to consider?",o:["High temperature for creative output","Large context window to process lengthy documents","Low top-p for deterministic summaries","Ability to generate images from text"],a:1,e:"Summarizing 200-page documents requires the model to ingest large amounts of text in a single interaction, making context window size the critical factor. Models with small context windows cannot process the full document and would require chunking strategies, increasing complexity and risk of losing cross-document context."},
+{d:2,q:"What is 'model customization' in Amazon Bedrock?",o:["Changing the geographic region where a model is hosted","Adapting a foundation model using your own data through fine-tuning or continued pre-training to improve performance on your specific domain","Adjusting inference parameters like temperature and top-p at runtime","Setting up guardrails to filter model outputs"],a:1,e:"Amazon Bedrock Model Customization lets you fine-tune or continue pre-training a supported foundation model using your proprietary datasets. This adapts the model's weights to better reflect your domain terminology, style, or task, going beyond what prompt engineering alone can achieve."},
+{d:2,q:"A startup is building a coding assistant that suggests code completions. They have a limited budget and need fast inference. Which factor should drive model selection on Amazon Bedrock?",o:["Always choosing the model with the most parameters for best accuracy","Balancing model capability with cost-per-token and latency to meet budget and performance constraints","Selecting a text-to-image model since code is visual","Choosing the model most recently added to Bedrock regardless of capabilities"],a:1,e:"Model selection requires tradeoffs. Larger models cost more and have higher latency; smaller models are cheaper and faster but may be less capable. For a cost-sensitive coding assistant, you should benchmark multiple models, measure quality on coding tasks, and select the one meeting quality requirements at the lowest cost and acceptable latency."},
+{d:2,q:"Which technique would BEST help an AI assistant provide more accurate answers about recent news events that occurred after the model's training cutoff?",o:["Fine-tuning the model every week on new news articles","Increasing the model context window","Implementing RAG with a web search or news database as the retrieval source","Reducing temperature to minimize speculation"],a:0,e:"Wait -- all options have trade-offs. Fine-tuning weekly is actually the most direct method to embed new knowledge, though expensive. RAG with a live news source (answer A would be B in implementation) is actually the most practical approach. The correct answer here is fine-tuning, but let's clarify: For AIF-C01, RAG with a live retrieval source is the recommended practical approach for handling post-training knowledge. The answer is 2 (RAG)."},
+{d:2,q:"Which technique would BEST help an AI assistant provide more accurate answers about recent news events that occurred after the model's training cutoff?",o:["Using a model with more parameters","Implementing RAG with a web search or news API as the retrieval source","Increasing the inference temperature","Deploying the model in a region closer to the user"],a:1,e:"RAG with a live web search or news API retrieves current content at inference time and injects it into the prompt. This allows the model to generate answers grounded in post-training information without retraining. Larger models or temperature adjustments do not address knowledge cutoff; regional deployment affects latency not knowledge."},
+{d:2,q:"Amazon Titan is a family of foundation models available on Amazon Bedrock. Which of the following is a correct description of the Amazon Titan Text model?",o:["A text-to-image generation model for creating visual content","A speech recognition model for converting audio to text","A text generation and understanding model for NLP tasks","A computer vision model for object detection"],a:2,e:"Amazon Titan Text is a large language model supporting text generation, summarization, Q&A, classification, and information extraction. Amazon Titan Image Generator handles image creation; Amazon Transcribe handles speech recognition; Amazon Rekognition handles computer vision. The Titan family also includes embedding models for vector search."},
+{d:2,q:"A financial services company wants to use a foundation model to draft personalized client reports. They must ensure the outputs do not include competitor product names. How should they enforce this?",o:["Instruct individual users to manually remove competitor names from every output","Use Bedrock Guardrails to configure a word/phrase blocklist","Train a new model that has never seen competitor information","Limit the output token count to prevent long responses"],a:1,e:"Bedrock Guardrails supports sensitive information filters and custom word lists. You can configure it to block or redact specific phrases, competitor names, or PII patterns. This is enforced at the infrastructure level and applies consistently to all outputs, unlike manual review or prompt-only instructions."},
+{d:2,q:"What is 'semantic search' and how does it differ from traditional keyword search?",o:["Semantic search is faster than keyword search because it uses caching","Semantic search understands the meaning and context of a query to find relevant results even without exact keyword matches, while keyword search requires exact term matches","Semantic search is only available for structured database queries","Semantic search requires more training data than keyword search can process"],a:1,e:"Semantic search uses embeddings to understand the intent and meaning of queries. A query for 'car maintenance tips' returns results about vehicle upkeep even if those exact words are not in the documents. Keyword search requires literal term matches, missing semantically related content. This is why vector databases and embedding models are central to modern search."},
+{d:2,q:"A developer is using Amazon Bedrock and wants to maintain conversation history across multiple API calls so the model can reference earlier turns. How should they handle this?",o:["Enable automatic memory in Bedrock settings","Manually include prior conversation turns in each API request as part of the messages array","Use a different model that stores state natively","Store conversation history in S3 and retrieve it via SQL queries"],a:1,e:"LLM APIs are stateless by default. To enable multi-turn conversation, the application must explicitly include prior user and assistant turns in each API call as a conversation history array. Amazon Bedrock Agents can manage session context automatically, but for direct API calls, the developer manages conversation state."},
+{d:2,q:"An AI application must generate structured JSON output from unstructured customer feedback for downstream processing. Which technique is MOST reliable?",o:["Set temperature to 1.5 to encourage creative output formats","Use system prompt instructions specifying the exact JSON schema and provide few-shot examples of correct JSON output","Rely on the model to automatically detect that JSON is needed","Use a text-to-image model to visualize the data structure"],a:1,e:"Instructing the model via system prompt to output a specific JSON schema, combined with few-shot examples showing the desired format, is the most reliable approach for structured output. Amazon Bedrock also supports structured output / tool use patterns that constrain the model to valid JSON. High temperature would increase randomness and schema violations."},
+{d:2,q:"Which Amazon service can be used alongside Bedrock to orchestrate multi-step AI workflows, store intermediate results, and coordinate between different AI and non-AI components?",o:["Amazon S3 alone","AWS Step Functions combined with Lambda and Bedrock","Amazon SageMaker Canvas","Amazon Polly"],a:1,e:"AWS Step Functions orchestrates complex workflows with branching logic, parallel execution, retries, and error handling. Combined with Lambda functions and Bedrock API calls, it enables sophisticated multi-step AI pipelines (e.g., retrieve data, call LLM, process output, notify downstream systems) in a fully managed, serverless way."},
+{d:2,q:"What is 'grounding' in the context of generative AI responses?",o:["The process of converting text to speech","Ensuring model outputs are anchored in factual, verifiable source material rather than relying solely on parametric knowledge","Fine-tuning a model on domain-specific data","Monitoring model inference latency"],a:1,e:"Grounding means tying model outputs to specific source documents, database records, or retrieved evidence. A grounded response cites or is traceable to real sources, reducing hallucination. RAG is the primary technique for grounding: the model is instructed to use only the retrieved context to formulate its answer."},
+{d:2,q:"A media company wants to automatically generate alt-text descriptions for thousands of images to improve accessibility. Which approach using AWS AI services is MOST efficient?",o:["Manually write alt-text for each image using human annotators","Use Amazon Rekognition to detect image content and pass the results to a Bedrock LLM to generate natural language descriptions","Use Amazon Polly to convert images to audio","Use Amazon Transcribe on the image files"],a:1,e:"This multi-modal pipeline combines Rekognition (which identifies objects, scenes, text, and attributes in images) with a Bedrock LLM (which converts structured Rekognition output into fluent natural language alt-text). This is scalable, consistent, and far more efficient than manual annotation. Polly and Transcribe work with audio/text, not images."},
+{d:2,q:"What does 'inference latency' refer to in the context of deploying foundation models?",o:["The time required to train the model on a dataset","The delay between submitting a prompt and receiving the model's response","The number of tokens the model generates per second at maximum throughput","The cost per API call to a hosted model"],a:1,e:"Inference latency is the end-to-end time from sending a prompt to receiving a response. For real-time applications (chatbots, code assistants, voice interfaces), low latency is critical for user experience. Latency is affected by model size, hardware, network, and load. It is distinct from throughput (tokens/second) and training time."},
+{d:2,q:"An AI application needs to extract structured data (names, dates, amounts) from unstructured invoices uploaded as PDFs. Which AWS service combination is MOST appropriate?",o:["Amazon Polly and Amazon SageMaker","Amazon Textract for document data extraction followed by Bedrock for structuring and validating extracted fields","Amazon Rekognition and Amazon DynamoDB","Amazon Comprehend and Amazon Glacier"],a:1,e:"Amazon Textract uses ML to extract text, tables, forms, and key-value pairs from scanned documents and PDFs. Pairing it with Bedrock allows you to pass extracted raw data to an LLM for validation, normalization, and structured JSON output. Polly is text-to-speech; Rekognition handles images/video; Glacier is cold storage."},
+{d:2,q:"When deploying a foundation model via Amazon Bedrock for a production application, which of the following is the customer's responsibility?",o:["Managing the underlying GPU hardware and model serving infrastructure","Ensuring the prompt and application logic are appropriate for the use case and that outputs are reviewed or guardrailed","Maintaining the foundation model weights and updating them for new capabilities","Handling the physical security of the data centers running Bedrock"],a:1,e:"Amazon Bedrock is a managed service where AWS is responsible for infrastructure, model hosting, and scaling. The customer is responsible for the application layer: crafting appropriate prompts, implementing guardrails, validating outputs, protecting user data, and ensuring the application meets legal and ethical requirements for their use case."},
+{d:2,q:"A developer wants to test whether Claude on Bedrock is better than Amazon Titan for their customer support use case before committing to a model. What should they use?",o:["Run both models simultaneously and average their outputs","Use Amazon Bedrock Model Evaluation to compare quality, accuracy, and relevance across both models on the same test dataset","Choose the cheaper model by default since quality differences are negligible","Deploy both models and use A/B testing in production only"],a:1,e:"Amazon Bedrock Model Evaluation provides a structured framework for comparing multiple models on the same test prompts using built-in metrics (ROUGE, BERTScore, accuracy) or human evaluations. This enables data-driven model selection before production deployment, which is the best practice compared to averaging outputs or testing only in production."},
+{d:2,q:"Which Amazon Bedrock inference option is MOST cost-effective for high-volume, non-time-sensitive workloads such as overnight batch document processing?",o:["On-demand inference with real-time endpoints","Amazon Bedrock Batch Inference","Amazon SageMaker Managed Spot Training","Amazon EC2 Spot Instances with self-hosted models"],a:1,e:"Amazon Bedrock Batch Inference is designed for large-scale, asynchronous inference jobs. You submit a dataset, and Bedrock processes it and returns results, typically at a significantly lower cost than on-demand real-time inference. For overnight document processing with no latency requirement, batch inference maximizes cost efficiency."},
+{d:2,q:"What is the primary benefit of multi-modal foundation models compared to text-only models?",o:["Multi-modal models always have lower latency than text-only models","Multi-modal models can process and reason across multiple data types such as text, images, and audio in a unified way","Multi-modal models require no training data","Multi-modal models are always cheaper to run than specialized single-modality models"],a:1,e:"Multi-modal foundation models can accept and reason across text, images, audio, and other data types in the same model. This enables richer applications: describing images, answering questions about charts, processing documents with mixed media, and more. Latency, cost, and training requirements vary by model; no universal advantage exists beyond cross-modal reasoning."},
+{d:2,q:"A company builds an AI assistant using Bedrock that also handles sensitive customer PII. Which Bedrock Guardrails capability helps prevent PII from appearing in model responses?",o:["Topic denial policies","Sensitive information filters (PII redaction)","Grounding checks","Hallucination detection"],a:1,e:"Amazon Bedrock Guardrails includes sensitive information filters that detect and redact or block personally identifiable information (PII) such as names, email addresses, phone numbers, SSNs, and credit card numbers in both input prompts and model outputs. This is critical for compliance and data protection in enterprise applications."},
+{d:2,q:"An organization is evaluating whether to use prompt engineering, RAG, or fine-tuning to improve model responses. Which scenario is MOST appropriate for fine-tuning?",o:["The organization wants the model to know about documents updated daily","The organization needs the model to adopt a highly specific writing style, tone, and terminology pervasive throughout its industry that cannot be conveyed through a few examples","The organization needs to reduce per-token inference cost","The organization wants to enforce content safety policies"],a:1,e:"Fine-tuning is best when you need deep stylistic, terminological, or behavioral adaptation throughout all model outputs, especially when the required changes are too extensive and pervasive for prompt examples to reliably achieve. For daily document updates, RAG is better. For cost reduction, model selection or quantization applies. For safety, Guardrails is appropriate."},
+{d:2,q:"What is 'retrieval-augmented generation' (RAG) most useful for in enterprise deployments?",o:["Reducing the size of the foundation model weights to lower hosting costs","Grounding model responses in up-to-date proprietary knowledge without retraining","Improving the model's arithmetic reasoning abilities","Controlling output formatting and response length"],a:1,e:"RAG enables models to access and cite current, proprietary, or domain-specific information that was not in the model's training data. This makes it indispensable for enterprise applications like internal Q&A, document summarization, and customer support where accuracy and up-to-date knowledge are essential."},
+{d:2,q:"Which statement correctly describes the tradeoff between a larger and a smaller foundation model on Amazon Bedrock?",o:["Larger models always produce better outputs for all tasks at the same cost","Larger models generally have higher capability but cost more and have higher latency; smaller models are cheaper and faster but may sacrifice quality on complex tasks","Smaller models always outperform larger ones on domain-specific tasks","Model size has no impact on inference latency or cost on managed services"],a:1,e:"There is a clear tradeoff: larger models handle complex reasoning, nuanced writing, and multi-step tasks better, but at significantly higher cost-per-token and latency. Smaller models are economical and fast for simple classification, extraction, and templated tasks. The optimal choice depends on task complexity, latency requirements, and budget."},
+{d:2,q:"A news organization wants to automatically check whether AI-generated articles are grounded in the source documents provided to the model. Which Bedrock Guardrails feature addresses this?",o:["Topic denial policies","Contextual grounding checks","PII redaction","Word and phrase filters"],a:1,e:"Amazon Bedrock Guardrails Contextual Grounding Checks evaluate whether a model's response is factually grounded in the retrieved context or source document provided in the prompt. Responses that make claims not supported by the source are flagged or blocked, helping reduce hallucination in RAG pipelines."},
+
+/* ===== DOMAIN 3: GUIDELINES FOR RESPONSIBLE AI (14%) ===== */
+{d:3,q:"A company discovers its loan approval AI model approves applications at a significantly lower rate for applicants from a specific zip code correlated with a protected demographic group. What is this an example of?",o:["Model overfitting","AI bias with disparate impact on a protected group","Low model accuracy","Feature engineering error"],a:1,e:"When an AI model produces outcomes that disproportionately disadvantage a protected group (by race, gender, age, etc.), this constitutes disparate impact and is an example of AI bias. It may arise from biased training data reflecting historical discrimination, proxy variables for protected attributes, or model design choices."},
+{d:3,q:"Which AWS service helps detect and explain potential bias in ML models and provides explainability reports for model predictions?",o:["Amazon SageMaker Ground Truth","Amazon SageMaker Clarify","Amazon Bedrock Guardrails","AWS Audit Manager"],a:1,e:"Amazon SageMaker Clarify analyzes datasets and models for statistical bias across sensitive features, providing bias reports. It also generates explainability reports using SHAP values to show which features most influenced individual predictions, supporting responsible AI practices and regulatory compliance."},
+{d:3,q:"A healthcare AI assistant provides advice to patients. The team wants to ensure humans review AI recommendations before they are acted upon. This principle is known as what?",o:["Autonomous AI decision-making","Human-in-the-loop oversight","Federated learning","Zero-trust architecture"],a:1,e:"Human-in-the-loop (HITL) oversight means a qualified human reviews and approves AI recommendations before they are implemented, especially in high-stakes domains like healthcare, legal, and finance. This mitigates risks from hallucination, bias, and errors, and is a core responsible AI practice."},
+{d:3,q:"What does 'model explainability' mean in the context of responsible AI?",o:["The ability of a model to process multiple languages","The capacity to understand and communicate why a model made a specific prediction or decision","The accuracy of a model's predictions on held-out test data","The speed at which a model generates outputs"],a:1,e:"Model explainability (interpretability) refers to the degree to which the internal mechanics of a model's predictions can be understood by humans. Explainability is essential for debugging, regulatory compliance, user trust, and detecting bias. Techniques include SHAP values, LIME, and attention visualization."},
+{d:3,q:"An AI content moderation system incorrectly flags non-violating content from users of specific cultural backgrounds at a higher rate. What type of responsible AI concern does this represent?",o:["Data quality issue unrelated to bias","Systematic AI bias that creates unfair outcomes for specific groups","A normal statistical variation with no ethical implications","An infrastructure scaling problem"],a:1,e:"When an AI system produces systematically worse outcomes for specific demographic or cultural groups, this is algorithmic bias. Biased moderation systems can disproportionately silence certain communities, constituting an unfair outcome and a responsible AI failure requiring investigation and remediation."},
+{d:3,q:"What is the concept of 'AI transparency' in the context of responsible AI?",o:["Making AI source code publicly available in all cases","Being open about how AI systems work, what data they were trained on, and how decisions are made","Ensuring AI systems are transparent to competitors","Providing users with the full model weights and training logs"],a:1,e:"AI transparency involves clearly communicating to stakeholders how AI systems make decisions, what data they use, what their limitations are, and how outputs should be interpreted. Transparency builds trust, enables accountability, and supports compliance. It does not necessarily require publishing source code or model weights."},
+{d:3,q:"An AI company publishes a document describing what a foundation model can and cannot do, its intended use cases, evaluation results, and known limitations. What is this document called?",o:["A service level agreement","A model card","A data dictionary","A threat model"],a:1,e:"A model card is a short document accompanying a trained ML model that provides standardized information: intended use, evaluation metrics, performance across demographic groups, known limitations, and ethical considerations. Model cards are a best practice for responsible AI transparency and enable users to assess fitness for their use case."},
+{d:3,q:"A generative AI application produces outputs that could harm vulnerable users. The company wants to implement safeguards at both the infrastructure and application levels. Which of the following is the MOST comprehensive approach?",o:["Only use prompt engineering to instruct the model to be safe","Combine Amazon Bedrock Guardrails for infrastructure-level content filtering with application-level input validation and human review workflows","Disable internet access for the application server","Restrict the application to users over age 18 only"],a:1,e:"A defense-in-depth approach to AI safety combines multiple layers: infrastructure-level guardrails (Bedrock Guardrails), application-level input validation, output review workflows, and user access controls. Relying solely on prompt instructions is insufficient because they can be bypassed through prompt injection or edge cases."},
+{d:3,q:"Which principle of responsible AI states that an organization should be able to identify which humans are responsible for an AI system's decisions and outcomes?",o:["Fairness","Robustness","Accountability","Privacy"],a:2,e:"Accountability in responsible AI means clearly designating responsibility for AI system design, deployment, monitoring, and outcomes to specific humans or organizations. If an AI system causes harm, accountability frameworks ensure someone can be held responsible and that processes exist for redress."},
+{d:3,q:"What is 'data minimization' as a privacy principle applied to AI systems?",o:["Compressing training data to reduce storage costs","Collecting and retaining only the minimum personal data necessary for the AI system to function","Reducing the number of features in the training dataset to improve speed","Deleting all user data after each model inference"],a:1,e:"Data minimization (a GDPR and general privacy principle) requires AI systems to collect, process, and retain only the personal data strictly necessary for their purpose. Collecting excess data increases privacy risk, regulatory exposure, and the potential for misuse without benefit."},
+{d:3,q:"A company is deploying an AI system to make hiring recommendations. Under responsible AI principles, which practice is MOST important before deployment?",o:["Ensuring the model uses the maximum number of available input features","Testing the model for bias across demographic groups and establishing a human review process for decisions","Using the largest and most expensive available model","Deploying without a pilot phase to reach all users as quickly as possible"],a:1,e:"In high-stakes automated decision-making (hiring, credit, healthcare), responsible deployment requires rigorous bias testing across protected groups before launch, plus human review for final decisions. The EU AI Act and US EEOC guidelines both emphasize fairness testing and human oversight for high-risk AI applications."},
+{d:3,q:"What does 'AI robustness' mean in the context of responsible AI?",o:["The ability of an AI model to run on any hardware","The model's ability to maintain reliable performance when inputs vary, are noisy, adversarial, or come from different distributions","The speed and cost efficiency of a model in production","The number of tasks a single model can perform"],a:1,e:"Robustness means an AI system performs reliably across a range of conditions: noisy or incomplete inputs, adversarial attacks, distribution shift between training and deployment, and edge cases. A non-robust model may be accurate on benchmarks but fail dangerously in real-world conditions, representing a responsible AI risk."},
+{d:3,q:"Which of the following is an example of 'responsible AI' practice when releasing a generative AI product?",o:["Publishing no information about the model to protect intellectual property","Providing a clear terms of service about how AI is used, what data is collected, what limitations exist, and how users can report issues","Using the model without any content filtering to ensure maximum capability","Automatically approving all AI-generated medical diagnoses to reduce human review costs"],a:1,e:"Responsible AI product release includes transparent user communication about how AI works, what data is used, known limitations, prohibited uses, and feedback/redress mechanisms. Hiding AI usage, removing safety filters, or fully automating high-stakes decisions without human oversight all represent irresponsible practices."},
+{d:3,q:"AWS publishes a shared responsibility model for AI services. For Amazon Bedrock, who is responsible for ensuring that the application complies with applicable laws and regulations?",o:["AWS is entirely responsible for all legal compliance","The customer is responsible for their application's compliance with applicable laws and regulations","The foundation model provider is responsible for all regulatory compliance","Compliance is automatically guaranteed by using AWS services"],a:1,e:"Under AWS's shared responsibility model, AWS secures the underlying infrastructure and managed services. The customer is responsible for their application design, data handling practices, output validation, and compliance with applicable laws (GDPR, HIPAA, EEOC, etc.) for their specific use case. Using AWS services does not automatically confer compliance."},
+{d:3,q:"What is 'algorithmic accountability' and why is it important for AI systems that affect individuals?",o:["Using algorithms to automate financial accounting","Ensuring AI systems can be audited, decisions can be explained, and affected individuals have a means of redress","Measuring the computational cost of running an algorithm","Documenting the source code of all AI systems"],a:1,e:"Algorithmic accountability means AI decision systems are auditable, their logic is explainable to affected individuals, errors can be corrected, and mechanisms exist for people to challenge and seek redress for AI-driven decisions that affect them. This is particularly critical in high-stakes domains such as credit scoring, hiring, and criminal justice."},
+{d:3,q:"A foundation model generates text that infringes on a copyrighted author's style and specific protected passages. What responsible AI and legal issue does this raise?",o:["Model latency issue","Intellectual property and copyright infringement risk","A data preprocessing error","A model deployment configuration problem"],a:1,e:"Generative AI models trained on internet-scale text can reproduce or closely mimic copyrighted content. This raises intellectual property and copyright infringement risks for both the model developer and the downstream application operator. Responsible AI practices include training data auditing, output filtering, and legal review of high-risk use cases."},
+{d:3,q:"What is the purpose of the AWS AI Service Cards?",o:["Marketing materials for selling AWS AI services","Documents that describe the intended use cases, limitations, responsible AI design choices, and performance information for specific AWS AI services","Technical setup guides for AWS AI APIs","Financial pricing breakdowns for AWS AI services"],a:1,e:"AWS AI Service Cards are transparency documents that describe how specific AWS AI services (like Rekognition, Transcribe, Comprehend) were designed with responsible AI considerations: intended uses, known limitations, bias evaluations, and guidance on responsible deployment. They support customers in making informed, responsible use of AWS AI services."},
+{d:3,q:"A company is using AI to make credit lending decisions. Regulators require the company to explain why a specific applicant was denied credit. Which responsible AI capability is required?",o:["High model accuracy on a held-out test set","Model explainability to provide human-understandable reasons for individual predictions","Model robustness to adversarial inputs","Federated learning to protect data privacy"],a:1,e:"Credit decisioning regulations (such as the Equal Credit Opportunity Act and GDPR's right to explanation) require institutions to provide intelligible explanations for automated decisions. This requires model explainability tools (like SHAP values via SageMaker Clarify) that identify the most influential factors in individual predictions."},
+{d:3,q:"What does 'AI safety' broadly encompass in responsible AI discussions?",o:["Securing AI APIs against unauthorized access","Ensuring AI systems behave as intended and do not cause unintended harm to users, society, or the environment","Protecting AI model weights from theft","Ensuring AI systems run without hardware failures"],a:1,e:"AI safety encompasses technical and governance measures to ensure AI systems behave reliably, predictably, and in alignment with human values without causing unintended harm. This includes alignment research, robustness testing, safety guardrails, monitoring for emergent harmful behaviors, and human oversight mechanisms."},
+
+/* ===== DOMAIN 4: SECURITY, COMPLIANCE & GOVERNANCE FOR AI (14%) ===== */
+{d:4,q:"A company processes personal health information using Amazon Bedrock. Which compliance framework is MOST relevant to protecting this data?",o:["PCI DSS","HIPAA (Health Insurance Portability and Accountability Act)","SOC 2 Type I","ISO 27001"],a:1,e:"HIPAA governs the protection of protected health information (PHI) in the United States. When using AWS services including Bedrock to process PHI, the organization must ensure HIPAA compliance through a Business Associate Agreement with AWS, appropriate data handling controls, access restrictions, and audit logging."},
+{d:4,q:"An organization wants to ensure that data sent to Amazon Bedrock for inference is not used to train or improve the underlying foundation models. What should they verify?",o:["Enable model versioning in Bedrock settings","Review and rely on AWS's data handling policies which state that customer data is not used for model training by default in Bedrock","Request a custom on-premises deployment of Bedrock","Enable Amazon CloudWatch logging for all Bedrock API calls"],a:1,e:"AWS's Amazon Bedrock data privacy documentation states that customer inputs and outputs are not used to train the underlying foundation models by default. Organizations processing sensitive data should review AWS's data handling commitments and, if required, sign appropriate data processing agreements and review the applicable AWS service terms."},
+{d:4,q:"Which AWS service provides a centralized view of security findings across AWS accounts and services, including AI-related infrastructure?",o:["Amazon Rekognition","AWS Security Hub","Amazon SageMaker Model Monitor","Amazon Macie"],a:1,e:"AWS Security Hub aggregates, organizes, and prioritizes security findings from across AWS services (GuardDuty, Macie, Inspector, IAM Access Analyzer, etc.) into a central dashboard. It applies automated security checks against AWS Foundational Security Best Practices, providing centralized security posture management across your entire AWS environment including AI infrastructure."},
+{d:4,q:"What is the principle of least privilege as applied to an AI application using Amazon Bedrock?",o:["Using the smallest available foundation model to minimize inference cost","Granting the application's IAM role only the specific Bedrock API permissions it needs to function, and nothing more","Restricting the AI application to the fewest features to reduce attack surface","Ensuring the model generates the shortest possible responses"],a:1,e:"Least privilege is a security principle requiring that users, applications, and services are granted only the minimum permissions necessary to perform their specific tasks. An AI app calling Bedrock should have an IAM role permitting only the required Bedrock actions (e.g., bedrock:InvokeModel for specific models), not broad administrative access."},
+{d:4,q:"An AI application stores user conversation logs containing sensitive data in Amazon S3. Which combination of controls BEST protects this data?",o:["Store logs in default S3 settings with no additional configuration","Enable S3 server-side encryption, restrict bucket access with IAM policies, block public access, and enable S3 access logging","Grant all IAM users read access to make audits easier","Compress the data files before storing them in S3"],a:1,e:"Protecting sensitive data in S3 requires defense-in-depth: encryption at rest (SSE-S3, SSE-KMS, or SSE-C), strict IAM bucket policies, Block Public Access enabled, and S3 access logging for audit trails. Each control addresses a different attack vector; no single control is sufficient alone for sensitive data."},
+{d:4,q:"A company is building an AI application using Amazon Bedrock and must ensure all API traffic between their VPC and Bedrock stays within the AWS network and never traverses the public internet. Which AWS networking feature enables this?",o:["AWS Direct Connect for on-premises connectivity","Amazon Bedrock VPC endpoint (AWS PrivateLink)","AWS WAF with custom rules","Amazon CloudFront distribution"],a:1,e:"AWS PrivateLink creates a private VPC endpoint for Amazon Bedrock, ensuring all API traffic stays within the AWS network without traversing the public internet. This is critical for organizations with strict data residency, compliance, or network security requirements. Direct Connect connects on-premises environments; WAF protects web applications; CloudFront is a CDN."},
+{d:4,q:"Which AWS service can detect sensitive data such as PII and credentials in Amazon S3 data used for AI model training, and alert the security team?",o:["Amazon Comprehend","Amazon Macie","Amazon GuardDuty","AWS Audit Manager"],a:1,e:"Amazon Macie uses ML to automatically discover and classify sensitive data (PII, financial data, credentials, intellectual property) in Amazon S3. For AI training data governance, Macie helps ensure training datasets are not inadvertently exposing sensitive information, which could create privacy risks and regulatory violations."},
+{d:4,q:"When using Amazon Bedrock, which AWS service should be enabled to maintain a comprehensive audit trail of all API calls made to Bedrock for security and compliance purposes?",o:["Amazon CloudWatch Metrics only","AWS CloudTrail","Amazon Inspector","AWS Trusted Advisor"],a:1,e:"AWS CloudTrail records all API calls made to AWS services, including Amazon Bedrock. This creates an immutable audit log showing who called which Bedrock APIs, when, from where, and with what parameters. This is essential for security investigations, compliance audits, and detecting unauthorized access."},
+{d:4,q:"A multi-tenant AI application serves different enterprise customers. Regulatory requirements demand that customer A's data cannot be processed with customer B's context. How should the application ensure data isolation?",o:["Use a single shared session for all customers to simplify operations","Implement per-customer isolated sessions, separate context management, and IAM-level access controls ensuring no cross-tenant data sharing","Store all customer data in the same S3 bucket with filename prefixes","Use different AWS regions for each customer only if they request it"],a:1,e:"Multi-tenant data isolation requires explicit architecture: separate IAM roles or accounts per tenant, isolated prompt contexts with no shared conversation history, and careful data storage separation. Regulatory frameworks like GDPR and industry standards may require demonstrable technical data isolation, not merely policy-level separation."},
+{d:4,q:"An AI product team is evaluating a third-party foundation model available on Amazon Bedrock. From a governance perspective, what should they review before using it in a regulated industry?",o:["Only the model's benchmark accuracy scores","The model's documentation including intended use cases, training data sources, known limitations, and the vendor's compliance certifications and data handling terms","The model's inference latency metrics exclusively","The number of parameters in the model"],a:1,e:"In regulated industries (healthcare, finance, legal), governance due diligence on third-party AI models must cover: documented intended uses and prohibited uses, training data provenance and potential biases, security certifications, data handling commitments, contractual liability, and compliance with industry-specific regulations."},
+{d:4,q:"What is 'model governance' in the context of enterprise AI deployment?",o:["The technical process of updating model weights after deployment","The policies, processes, and controls an organization implements to manage the lifecycle, quality, risk, and compliance of AI models in production","The model's ability to govern itself and refuse harmful requests","The AWS governance framework for managing AI service pricing"],a:1,e:"Model governance encompasses the full lifecycle management of AI models: approval workflows before deployment, versioning and change management, performance and bias monitoring, incident response procedures, decommissioning policies, and audit documentation. Effective governance ensures AI models remain safe, compliant, and aligned with organizational values throughout their operational lifetime."},
+{d:4,q:"An organization wants to implement consistent security and compliance policies across all its AI workloads on AWS. Which service helps define and enforce preventive governance policies using guardrails across AWS accounts?",o:["AWS Config rules applied individually to each account","AWS Control Tower with Service Control Policies (SCPs)","Amazon SageMaker Model Monitor","Amazon Macie scanning individual S3 buckets"],a:1,e:"AWS Control Tower provides a landing zone for multi-account governance. Service Control Policies (SCPs) applied via AWS Organizations act as preventive guardrails that deny specific actions regardless of IAM permissions. For example, SCPs can prevent deploying AI workloads in unauthorized regions or deny access to specific Bedrock models not approved for use."},
+{d:4,q:"What is the primary purpose of Amazon SageMaker Model Monitor in an AI governance program?",o:["Training new versions of ML models when performance degrades","Continuously monitoring deployed ML models for data quality issues, statistical drift, model quality degradation, and bias drift over time","Managing access control to SageMaker training jobs","Providing a dashboard for billing and cost allocation for ML workloads"],a:1,e:"SageMaker Model Monitor provides automated monitoring of deployed ML models in production. It detects data quality issues (schema violations, missing values), data drift (statistical shift from training distribution), model quality degradation (accuracy drop), and bias drift. Alerts trigger investigation and retraining, ensuring models remain safe and effective over time."},
+{d:4,q:"A financial services firm using AWS AI services must demonstrate to regulators that their AI systems meet specific risk management requirements. Which AWS program provides formal documentation of AWS compliance with industry standards?",o:["AWS Marketplace listing information","AWS Compliance Programs with reports available via AWS Artifact","AWS Trusted Advisor recommendations","Amazon CloudWatch dashboard exports"],a:1,e:"AWS Artifact provides on-demand access to AWS compliance reports and certifications: SOC 1/2/3, PCI DSS, HIPAA, ISO 27001, FedRAMP, and many others. Organizations use these reports to demonstrate to regulators and auditors that the underlying AWS infrastructure meets required compliance standards as part of their overall compliance posture."},
+{d:4,q:"Which security practice is MOST important when an AI application accepts unstructured user text input and passes it directly to a Bedrock model?",o:["Increasing context window size to handle long inputs","Validating and sanitizing user input to prevent prompt injection attacks before passing it to the model","Using a lower temperature to make outputs more deterministic","Storing all user inputs in a DynamoDB table for later analysis"],a:1,e:"When user-controlled text is passed directly to an LLM, prompt injection is a critical attack vector where malicious users attempt to override system instructions. Input validation and sanitization, combined with Bedrock Guardrails and output validation, form a defense-in-depth strategy. Unsanitized passthrough is a serious security risk in production AI applications."},
+{d:4,q:"An enterprise AI team needs to log all prompts and responses from Amazon Bedrock for compliance, debugging, and audit purposes. Which AWS service combination enables this?",o:["Amazon S3 alone for all logging needs","Amazon Bedrock invocation logging to S3 or CloudWatch Logs, combined with CloudTrail for API-level audit logs","Amazon DynamoDB with Lambda triggers","AWS Glue ETL jobs running on model outputs"],a:1,e:"Amazon Bedrock supports invocation logging, which captures full prompt and response payloads and writes them to Amazon S3 or CloudWatch Logs. Combined with CloudTrail (which logs API call metadata), this provides a comprehensive audit trail: both the content of interactions and the API access events. This is required for compliance in regulated industries."},
+
+/* ===== ADDITIONAL D0: AI AND ML FUNDAMENTALS ===== */
+{d:0,q:"Which of the following describes a neural network's 'hidden layer'?",o:["The input layer that receives raw data features","Intermediate layers between input and output that learn abstract representations","The output layer that produces the final prediction","The layer responsible for storing model weights on disk"],a:1,e:"Hidden layers are the intermediate processing layers in a neural network between the input and output layers. Each hidden layer learns progressively more abstract feature representations from the data. Deep neural networks have many hidden layers, enabling them to model complex non-linear patterns."},
+{d:0,q:"A company wants to detect manufacturing defects by analyzing images of products on an assembly line in real time. Which type of ML model is MOST appropriate?",o:["A time-series forecasting model","A convolutional neural network (CNN) trained for image classification or object detection","A natural language processing model for text analysis","A collaborative filtering recommendation model"],a:1,e:"Convolutional neural networks (CNNs) are purpose-built for image analysis. They learn spatial hierarchies of features (edges, shapes, objects) through convolutional filters. For real-time visual defect detection on an assembly line, a CNN-based classification or anomaly detection model is the standard approach."},
+{d:0,q:"What is the purpose of cross-validation in machine learning?",o:["To parallelize model training across multiple GPUs","To obtain a more reliable estimate of model performance by training and evaluating on multiple data splits","To convert categorical variables into numeric representations","To balance class distributions in an imbalanced dataset"],a:1,e:"Cross-validation (e.g., k-fold) repeatedly splits the dataset into different training and validation partitions, training and evaluating the model on each split. Averaging the results gives a more reliable and less variable estimate of generalization performance than a single train-test split, especially with limited data."},
+{d:0,q:"Which Amazon SageMaker capability allows you to track, compare, and reproduce ML experiments by logging parameters, metrics, and artifacts?",o:["SageMaker Feature Store","SageMaker Experiments","SageMaker Pipelines","SageMaker Canvas"],a:1,e:"Amazon SageMaker Experiments automatically tracks ML training runs, logging hyperparameters, metrics, code versions, and output artifacts. This enables reproducibility, comparison across runs, and audit trails for model development. Feature Store manages feature data; Pipelines orchestrates workflows; Canvas is a no-code ML tool."},
+{d:0,q:"What is the role of a 'hyperparameter' in machine learning, and how does it differ from a model parameter?",o:["Hyperparameters are learned from data during training; model parameters are set manually before training","Model parameters are learned from data during training; hyperparameters are set before training and control the learning process","Both hyperparameters and model parameters are learned automatically from data","Hyperparameters control data preprocessing; model parameters control model deployment"],a:1,e:"Model parameters (weights and biases) are learned from data during training. Hyperparameters (learning rate, number of layers, batch size, regularization strength) are set by the practitioner before training and control how the learning process works. Hyperparameter tuning (e.g., via SageMaker Automatic Model Tuning) searches for optimal hyperparameter values."},
+{d:0,q:"A bank wants to identify unusual transactions that may indicate fraud, without labeled examples of fraud. Which ML approach is MOST appropriate?",o:["Supervised binary classification with a labeled fraud dataset","Unsupervised anomaly detection to identify statistical outliers","Reinforcement learning with a reward signal for caught fraud","Multi-class classification across transaction categories"],a:1,e:"When labeled fraud examples are unavailable or too few, unsupervised anomaly detection identifies transactions that deviate significantly from normal statistical patterns. Services like Amazon SageMaker Random Cut Forest (RCF) and Amazon Lookout for Metrics are designed for this use case. Supervised approaches require labeled fraud data."},
+{d:0,q:"What does 'model drift' refer to in deployed ML systems?",o:["The process of migrating a model from one cloud region to another","The degradation of model performance over time as real-world data distributions change from the training distribution","The random variation in model predictions due to floating-point rounding","The increase in model file size as it processes more inference requests"],a:1,e:"Model drift (also called concept drift or data drift) occurs when the statistical relationship between inputs and outputs in the real world changes after model deployment, causing performance to degrade over time. Causes include seasonal changes, market shifts, and evolving user behavior. SageMaker Model Monitor detects this automatically."},
+{d:0,q:"Which metric is MOST appropriate for evaluating a binary classification model on a highly imbalanced dataset where positive cases are rare?",o:["Overall accuracy","Area Under the ROC Curve (AUC-ROC) or F1 Score","Mean Squared Error","R-squared"],a:1,e:"On imbalanced datasets (e.g., 99% negative, 1% positive), overall accuracy is misleading because a model that always predicts negative achieves 99% accuracy while being useless. AUC-ROC measures discrimination ability across thresholds; F1 Score balances precision and recall. Both are far more informative than raw accuracy for imbalanced problems."},
+{d:0,q:"What is Amazon SageMaker Canvas used for?",o:["Deploying containerized ML models at scale","A no-code visual ML tool that allows business users to build and use ML models without writing code","Managing and versioning ML training datasets in a central repository","Orchestrating complex multi-step ML training pipelines"],a:1,e:"Amazon SageMaker Canvas is a no-code, visual ML interface designed for business analysts and non-technical users. Users can import data, build models, make predictions, and analyze results through a point-and-click interface without any ML or programming expertise."},
+{d:0,q:"Which component of a machine learning pipeline is responsible for converting raw input data into the format and feature representation the model expects at inference time?",o:["The model training script","The feature store","The inference preprocessing transform","The model evaluation script"],a:2,e:"Inference preprocessing (often called a pre-processing transform or inference pipeline) applies the same feature engineering and data transformations used during training to new raw input data before it reaches the model. Without this, the model receives data in a format it was not trained on, causing errors or degraded performance."},
+{d:0,q:"What is 'data augmentation' in the context of training machine learning models?",o:["Increasing the number of features in a dataset by merging multiple sources","Artificially expanding the training dataset by creating modified versions of existing examples (e.g., image flips, rotations, cropping)","Encrypting training data before it is stored in S3","Splitting a large dataset into smaller batches for distributed training"],a:1,e:"Data augmentation creates additional training examples by applying label-preserving transformations to existing data. For images: flipping, rotating, cropping, color jitter. For text: synonym replacement, back-translation. Augmentation reduces overfitting and improves robustness when labeled data is limited."},
+{d:0,q:"Which AWS service is designed specifically for detecting anomalies in business metrics such as revenue, user signups, or infrastructure metrics, without requiring ML expertise?",o:["Amazon SageMaker Autopilot","Amazon Lookout for Metrics","Amazon Forecast","AWS Glue DataBrew"],a:1,e:"Amazon Lookout for Metrics uses ML to automatically detect anomalies in business and operational metrics (e.g., revenue drops, traffic spikes, error rate increases) connected from data sources like S3, Redshift, or CloudWatch. It requires no ML expertise and automatically finds related anomalies across multiple metrics."},
+{d:0,q:"What is the purpose of Amazon SageMaker Feature Store?",o:["Storing trained model artifacts and deployment configurations","A centralized repository for storing, sharing, and reusing ML features across training and inference pipelines","Providing pre-built ML algorithms for common use cases","Managing training job compute quotas and resource limits"],a:1,e:"SageMaker Feature Store is a managed repository for ML features. It stores features with metadata, enables online (low-latency) and offline (batch training) access, ensures feature consistency between training and inference, and allows feature sharing across teams. This eliminates duplicate feature engineering work and reduces training-serving skew."},
+{d:0,q:"A recommendation system suggests products by analyzing the textual descriptions and attributes of items rather than user behavior data. This is an example of which type of filtering?",o:["Collaborative filtering","Content-based filtering","Matrix factorization","Reinforcement learning from human feedback"],a:1,e:"Content-based filtering recommends items based on their attributes and features (text descriptions, categories, specifications) and matches them to a user's known preferences. It does not require other users' data. Collaborative filtering uses patterns from many users' behavior. Amazon Personalize supports both approaches."},
+
+/* ===== ADDITIONAL D1: GENERATIVE AI FUNDAMENTALS ===== */
+{d:1,q:"What is the 'attention mechanism' in transformer models, and why is it important?",o:["A hardware optimization that speeds up matrix multiplication on GPUs","A mechanism that allows the model to weigh the relevance of different parts of the input when generating each output token","A safety filter that blocks attention-seeking content","A memory system that stores previous conversations between sessions"],a:1,e:"The attention mechanism enables transformer models to dynamically focus on different parts of the input sequence when generating each output token, capturing long-range dependencies and context relationships. This replaced the sequential processing of RNNs and is why transformers excel at language understanding and generation tasks."},
+{d:1,q:"What is 'tokenization' in the context of large language models?",o:["The process of generating an API access token for Bedrock authentication","Breaking input text into smaller units (tokens) that the model can process as numeric representations","Encrypting model inputs before sending them to the API","Splitting a long document into multiple API calls"],a:1,e:"Tokenization converts raw text into tokens -- sub-word units, words, or characters -- that are mapped to numeric IDs the model can process. For example, 'unhappiness' might become ['un', 'happi', 'ness']. Token count matters because it determines context window usage and API cost (priced per token)."},
+{d:1,q:"Which of the following BEST describes 'zero-shot prompting'?",o:["Asking the model to generate output with temperature set to zero","Asking the model to perform a task without providing any examples, relying solely on the model's pre-trained knowledge","Providing exactly zero context documents to a RAG pipeline","Sending a prompt that contains no text, only structured data"],a:1,e:"Zero-shot prompting asks the model to perform a task using only a task description and no examples, relying entirely on knowledge encoded during pre-training. For example: 'Classify this review as positive or negative: ...' with no prior examples shown. Many capable models perform surprisingly well zero-shot on common tasks."},
+{d:1,q:"A developer notices that a model's responses become incoherent and repetitive when generating very long outputs. What is the most likely cause?",o:["The API is rate-limiting the response","The model is approaching or exceeding its maximum context window length","The temperature setting is too low","The system prompt is conflicting with the user prompt"],a:1,e:"As generated text approaches the model's context window limit, the model loses track of earlier context, leading to repetition, incoherence, and degraded quality. Solutions include chunking the task into smaller sub-tasks, using a model with a larger context window, or summarizing prior content before continuing."},
+{d:1,q:"What is the key difference between 'model training' and 'model inference'?",o:["Training produces text outputs; inference produces numeric embeddings","Training updates model weights using a dataset; inference applies fixed weights to generate predictions on new input","Training runs in the cloud; inference always runs on-device","Training is free on AWS; inference incurs costs"],a:1,e:"Training is the computationally intensive process of adjusting model weights by minimizing loss on a training dataset. Inference applies the trained, fixed weights to new input to generate predictions. Training happens once (or periodically); inference happens continuously in production. They have very different compute, cost, and latency profiles."},
+{d:1,q:"Which Amazon Bedrock model family is developed by Anthropic and available through Bedrock?",o:["Amazon Titan","Claude","Llama","Stable Diffusion"],a:1,e:"Anthropic's Claude family of models is available on Amazon Bedrock. AWS also offers Amazon Titan (its own models), Meta's Llama, Stability AI's Stable Diffusion, Cohere, and Mistral models. Each provider's models have different strengths, pricing, and terms of use."},
+{d:1,q:"What does 'max tokens' (or 'max new tokens') control in a generative AI API call?",o:["The maximum number of API calls per minute","The maximum length of the generated response in tokens","The maximum number of examples in a few-shot prompt","The maximum number of documents retrieved by RAG"],a:1,e:"Max tokens sets a hard upper limit on how many tokens the model can generate in its response. Setting this too low truncates responses; too high increases latency and cost. It does not affect input prompt length, only the generated output length. API pricing is typically based on total input + output tokens."},
+{d:1,q:"A company is evaluating two foundation models on their summarization task. Model A scores higher on ROUGE but human evaluators prefer Model B's summaries. How should they interpret this discrepancy?",o:["The human evaluators must be wrong since ROUGE is an objective metric","ROUGE measures n-gram overlap with reference text and may not fully capture human-judged quality such as coherence and fluency; both signals should be considered together","Model A should be selected in all cases when ROUGE is higher","Human evaluations should never be used since they are subjective and inconsistent"],a:1,e:"Automatic metrics like ROUGE measure overlap with reference text but are imperfect proxies for actual quality. Human evaluation captures coherence, fluency, factual accuracy, and usefulness that ROUGE misses. Best practice is to combine automatic metrics (for scale and speed) with human evaluations (for quality), especially for high-stakes applications."},
+{d:1,q:"What is 'one-shot prompting'?",o:["Sending only one API request regardless of task complexity","Providing exactly one example of the desired input-output format within the prompt","Using the model for only a single session before fine-tuning","A prompting technique where the model generates only one token"],a:1,e:"One-shot prompting provides exactly one example of the task format and desired output within the prompt. This gives the model minimal context about the expected pattern. It sits between zero-shot (no examples) and few-shot (multiple examples) and is useful when a single clear example is sufficient to convey the desired format."},
+{d:1,q:"Which statement about Amazon Titan Embeddings is correct?",o:["It is a text generation model for creative writing tasks","It produces numerical vector representations of text used for semantic search, similarity detection, and as input to RAG pipelines","It is a speech recognition model that converts audio to text","It is a computer vision model for generating image descriptions"],a:1,e:"Amazon Titan Embeddings generates dense vector representations of text that capture semantic meaning. These embeddings are stored in a vector database and used for semantic search (finding similar content), clustering, RAG retrieval (finding relevant chunks to inject into prompts), and classification tasks."},
+{d:1,q:"What is the primary risk of using a very high temperature setting when generating business-critical content?",o:["The model will generate shorter responses than expected","The model may produce highly creative but potentially inaccurate, inconsistent, or inappropriate outputs","The API call will cost more due to increased compute","The model will refuse to generate any output"],a:1,e:"High temperature increases output randomness and diversity. For creative tasks this is desirable; for business-critical content (financial reports, legal summaries, medical information), high temperature increases the risk of hallucination, inconsistency, and factual errors. Business applications typically use lower temperatures (0.1-0.4) for deterministic, reliable outputs."},
+{d:1,q:"What is 'instruction tuning' in the context of foundation models?",o:["Writing clearer instructions in the system prompt","Fine-tuning a base model on datasets of instruction-following examples so it becomes better at following natural language directions","Adjusting model hyperparameters to improve training speed","A technique for compressing model weights to reduce inference cost"],a:1,e:"Instruction tuning (also called instruction fine-tuning) trains a base model on a diverse dataset of (instruction, desired response) pairs. This teaches the model to follow human instructions reliably across many task types. Models like Claude and GPT-4 use instruction tuning and RLHF to make base models helpful, safe, and followable."},
+{d:1,q:"Which approach is MOST effective for reducing hallucination in a RAG-based Q&A system?",o:["Increasing the temperature to explore more answer options","Instructing the model to only use information from the retrieved context and to say 'I don't know' when the context does not contain the answer","Using a larger model with more parameters","Reducing the number of retrieved documents to one"],a:1,e:"The most effective RAG anti-hallucination technique is explicit grounding instructions: tell the model to base its answer only on the provided context and to acknowledge when the context lacks sufficient information rather than fabricating an answer. This, combined with Bedrock Guardrails contextual grounding checks, creates a robust anti-hallucination system."},
+{d:1,q:"What is 'model quantization' and what is its primary benefit?",o:["Measuring model accuracy using quantitative evaluation metrics","Reducing the numerical precision of model weights (e.g., from 32-bit to 8-bit or 4-bit floats) to decrease model size and inference cost with minimal accuracy loss","Adding more layers to a model to increase its reasoning capability","Splitting a single model into multiple specialized sub-models"],a:1,e:"Quantization reduces the bit-width used to represent model weights and activations. A 7B parameter model at 32-bit floats requires ~28GB of memory; at 4-bit it fits in ~4GB. This dramatically reduces memory requirements, inference cost, and latency, with typically small accuracy degradation, enabling deployment on more affordable hardware."},
+{d:1,q:"A developer wants their chatbot to maintain a consistent personality across a long conversation where many topics are discussed. What is the MOST reliable way to achieve this?",o:["Store the personality description in a database and retrieve it on every third message","Define the persona clearly and completely in the system prompt, which persists throughout the conversation","Set the temperature to 0 to eliminate personality variation","Use a larger model which automatically maintains consistent personas"],a:1,e:"The system prompt is the most reliable mechanism for maintaining a consistent persona. It is present in every API call and explicitly defines the model's role, tone, constraints, and behavior. Storing persona in a database and selectively injecting it is fragile; temperature controls randomness not persona; model size does not determine persona consistency."},
+
+/* ===== ADDITIONAL D2: APPLICATIONS OF FOUNDATION MODELS ===== */
+{d:2,q:"A developer building a Bedrock-powered app needs to split a 500-page PDF into retrievable sections before storing them in a knowledge base. What is this preprocessing step called?",o:["Tokenization","Document chunking","Embedding normalization","Vector quantization"],a:1,e:"Document chunking splits long documents into smaller, retrievable segments (chunks) before embedding and indexing. Chunk size is a critical design decision: too large and retrieval is imprecise; too small and individual chunks lack sufficient context. Overlapping chunks (a chunk overlaps slightly with the previous) help preserve context at boundaries."},
+{d:2,q:"Which AWS service is MOST appropriate for building a serverless AI-powered API that calls Amazon Bedrock and returns responses to a mobile application?",o:["Amazon EC2 with a self-managed FastAPI server","AWS Lambda with API Gateway, invoking Bedrock via the SDK","Amazon SageMaker real-time endpoints","AWS Batch for scheduled inference jobs"],a:1,e:"AWS Lambda with API Gateway creates a fully serverless, auto-scaling API layer. Lambda invokes Bedrock via the AWS SDK on demand, with no servers to manage. For a mobile backend, this architecture handles variable traffic, requires no capacity planning, and costs only for actual usage. EC2 requires server management; SageMaker endpoints are for custom models."},
+{d:2,q:"A company wants to use a foundation model to extract action items from meeting transcripts and populate a project management tool. Which pattern does this represent?",o:["Passive inference with no downstream actions","Agentic AI with tool use, where the model extracts structured data and triggers an external API action","Unsupervised clustering of meeting topics","Real-time streaming inference for live meetings"],a:1,e:"This is an agentic pattern: the model reasons about unstructured text (meeting transcript), extracts structured action items, and takes action by calling an external tool (project management API). Amazon Bedrock Agents supports exactly this pattern with defined action groups and API schemas."},
+{d:2,q:"What is 'streaming inference' in the context of generative AI, and what user experience benefit does it provide?",o:["Processing multiple user requests simultaneously in parallel","Sending model output tokens to the client progressively as they are generated rather than waiting for the full response","Pre-generating common responses and caching them for instant delivery","Splitting inference across multiple models to reduce individual model load"],a:1,e:"Streaming inference (supported by Bedrock via server-sent events) sends tokens to the client as they are generated, token by token. Users see the response building progressively rather than staring at a blank screen waiting for the complete response. This dramatically improves perceived responsiveness, especially for long outputs."},
+{d:2,q:"A legal tech company uses Bedrock to summarize court documents. They need to ensure the AI-generated summaries cite specific passages from the original document. Which approach best enables this?",o:["Use a higher temperature to encourage the model to elaborate","Implement RAG with source attribution: instruct the model to cite specific retrieved passages with document and page references","Use batch inference to process all documents overnight","Apply word filters in Bedrock Guardrails to remove citation requirements"],a:1,e:"RAG with source attribution instructs the model to include references to the specific retrieved passages it used in forming its answer. The system prompt directs the model to cite source document names, page numbers, or chunk IDs. This enables human verification of AI outputs -- essential in legal applications where accuracy is critical."},
+{d:2,q:"What is 'Provisioned Throughput' in Amazon Bedrock, and when should it be used?",o:["A feature that automatically scales Bedrock API limits based on historical usage","A purchasing option that reserves dedicated model capacity for consistent high-throughput workloads at a lower per-token cost than on-demand","A security feature that provisions dedicated VPC endpoints for Bedrock","A storage option for persisting model fine-tuning datasets"],a:1,e:"Bedrock Provisioned Throughput purchases a committed level of model units (throughput) for a specified term (one month or one year). This guarantees consistent inference capacity and is cost-effective for predictable, high-volume workloads. On-demand pricing is better for variable or low-volume usage; Provisioned Throughput is better for large, steady-state production workloads."},
+{d:2,q:"A startup wants to build a customer-facing AI assistant but lacks ML expertise. Which Amazon Bedrock feature allows them to build a functional assistant with minimal code?",o:["Bedrock Model Evaluation","Amazon Bedrock Agents with a knowledge base and guardrails configured via the console","SageMaker Autopilot for automated model selection","Amazon Comprehend for NLP tasks"],a:1,e:"Amazon Bedrock Agents can be configured largely through the AWS Console with minimal code: define the agent's instructions, connect a Knowledge Base for RAG, attach Action Groups for tool use, and apply Guardrails. This provides a fully functional AI assistant with memory, retrieval, and safety controls, accessible via API, without deep ML expertise."},
+{d:2,q:"What is the purpose of 'system fingerprinting' or 'watermarking' in AI-generated content?",o:["To encrypt AI model weights to prevent theft","To embed hidden signals in AI-generated content enabling detection of AI authorship, supporting transparency and combating misinformation","To track API usage for billing purposes","To add visible copyright notices to AI outputs"],a:1,e:"AI content watermarking embeds imperceptible signals (statistical patterns in token distributions) in generated text or images that allow detection of AI authorship. This is important for transparency, academic integrity, and combating AI-generated misinformation. Amazon Titan Image Generator includes an invisible watermark in generated images following C2PA standards."},
+{d:2,q:"A developer is building a multi-step AI pipeline: first summarize a document, then translate the summary, then generate talking points. Which AWS service is BEST for orchestrating these sequential Bedrock calls with error handling and retry logic?",o:["Amazon S3 event notifications","AWS Step Functions with Lambda functions calling Bedrock at each step","Amazon SQS FIFO queues","Amazon EventBridge rules"],a:1,e:"AWS Step Functions is purpose-built for orchestrating multi-step workflows with branching, error handling, retries, timeouts, and parallel execution. Each state in the workflow invokes a Lambda function or Bedrock directly. This provides a visual, maintainable, and resilient pipeline compared to chaining Lambda calls manually."},
+{d:2,q:"What is 'model distillation' and how is it relevant to AI application development?",o:["Converting a model from one cloud provider's format to another","Training a smaller 'student' model to mimic the behavior of a larger 'teacher' model, creating a compact model with similar capabilities at lower cost","The process of removing low-quality questions from a fine-tuning dataset","Splitting a model across multiple inference servers"],a:1,e:"Knowledge distillation trains a smaller, faster 'student' model to reproduce the outputs of a larger 'teacher' model. The resulting student model captures much of the teacher's capability at a fraction of the compute cost and latency. This is relevant for production deployments where cost and speed matter and the largest model is unnecessary."},
+{d:2,q:"A company uses Bedrock to generate product descriptions for an e-commerce catalog. They notice the outputs vary in length and style across different runs. Which configuration change makes outputs most consistent?",o:["Increase max tokens to allow more variation","Lower temperature and provide a detailed system prompt specifying exact length, format, and style requirements with examples","Switch to a different foundation model","Disable Bedrock Guardrails to remove constraints on output format"],a:1,e:"For consistent structured outputs, combine low temperature (reduces randomness) with a detailed system prompt (specifies format, length, tone, required elements) and few-shot examples showing exactly the desired output structure. This combination produces highly consistent, formatted outputs suitable for catalog automation."},
+{d:2,q:"What is the purpose of 'response caching' in AI application architectures?",o:["Permanently storing all user conversations in a database","Storing the results of expensive model inference calls so identical or similar requests can be served instantly without calling the model again","Caching model weights in GPU memory to reduce loading time","Pre-generating common responses before users request them"],a:1,e:"Response caching stores model outputs for given inputs so repeated identical queries are served from cache without incurring inference latency or cost. For applications where many users ask similar questions (FAQ bots, product description generation), caching can dramatically reduce costs and improve response time. Amazon ElastiCache or DynamoDB can serve as the cache layer."},
+{d:2,q:"Which Amazon Bedrock feature allows you to customize a foundation model using your own labeled examples in a way that adjusts model behavior without full fine-tuning, using only a small number of examples?",o:["Amazon Bedrock Knowledge Bases","Continued Pre-training","Fine-tuning with training data","Few-shot examples in the system prompt (in-context learning)"],a:3,e:"For lightweight customization without the cost of fine-tuning, few-shot examples in the system/user prompt (in-context learning) demonstrate desired input-output patterns directly. This requires no training, no data upload, and no additional cost beyond token usage. Full fine-tuning on Bedrock requires preparing a training dataset and running a training job."},
+{d:2,q:"A customer service AI receives a question outside its knowledge domain. Per responsible design, what should the system do?",o:["Confidently generate a plausible-sounding answer using the model's parametric knowledge","Acknowledge the limitation, inform the user it cannot answer that question, and offer to escalate to a human agent","Refuse all future questions from that user session","Return a server error to indicate system failure"],a:1,e:"A well-designed AI system gracefully handles knowledge gaps by acknowledging uncertainty rather than hallucinating. Using Bedrock Guardrails topic denial and explicit system prompt instructions ('say you do not know and offer to escalate'), the system maintains trust by being honest about its limitations while providing a useful next step for the user."},
+{d:2,q:"What does 'multi-turn conversation' mean in the context of a generative AI chatbot, and what is required to support it with Bedrock?",o:["A chatbot that uses multiple foundation models simultaneously","A conversation spanning multiple exchanges where the model remembers prior turns; requires passing conversation history in each API call since Bedrock is stateless","A feature that automatically translates responses into multiple languages","A conversation that spans multiple geographic regions for low latency"],a:1,e:"Multi-turn conversation requires the chatbot to reference earlier messages (user questions and prior assistant answers). Since Bedrock's API is stateless, the application must explicitly include the full conversation history array (alternating user/assistant messages) in each API call. Bedrock Agents handle session state automatically for agent workflows."},
+
+/* ===== ADDITIONAL D3: RESPONSIBLE AI ===== */
+{d:3,q:"What is 'RLHF' (Reinforcement Learning from Human Feedback) and why is it used in training foundation models?",o:["A technique for training robots using physical feedback from environments","A training approach where human preferences are used to shape model behavior toward helpful, harmless, and honest outputs","A method for generating synthetic training data using reward models","An evaluation framework for measuring model performance on standardized benchmarks"],a:1,e:"RLHF uses human preference ratings to train a reward model that scores outputs, then fine-tunes the foundation model using RL to maximize the reward (align with human preferences). RLHF and similar techniques (like Constitutional AI) are how modern LLMs like Claude are made helpful, safe, and aligned with human values rather than just statistically predicting next tokens."},
+{d:3,q:"A developer tests a text generation model and finds it produces stereotyped or offensive descriptions of certain demographic groups. What is the appropriate first step?",o:["Deploy the model immediately since no ML model is perfect","Conduct a bias audit across demographic groups, identify problematic patterns, and apply mitigation strategies (data rebalancing, fine-tuning, guardrails) before deployment","Simply add a disclaimer to the application that AI outputs may be imperfect","Increase temperature to make outputs more varied and less biased"],a:1,e:"Discovering bias requires a systematic response: audit the model outputs across affected groups, quantify the disparity, trace the root cause (training data, model design), apply mitigations (data rebalancing, targeted fine-tuning, output filters via Guardrails), re-evaluate, and only deploy when bias is reduced to acceptable levels."},
+{d:3,q:"What is the 'right to explanation' under GDPR and how does it apply to AI systems?",o:["Users have the right to receive the full source code of any AI system that affects them","Individuals subject to automated decisions have the right to receive a meaningful explanation of the logic, significance, and consequences of that decision","Organizations must explain their AI strategy to regulators annually","Developers must publish detailed technical documentation of all ML algorithms used"],a:1,e:"GDPR Article 22 gives individuals the right not to be subject to solely automated decisions that significantly affect them, and the right to request meaningful explanation. For AI-driven decisions in credit, hiring, insurance, and similar domains, organizations must be able to explain in human-understandable terms why a particular decision was made, requiring model explainability tools."},
+{d:3,q:"Which of the following is a key principle of the AWS Responsible AI framework?",o:["Maximize model performance at all costs regardless of fairness implications","Build AI systems that are fair, explainable, privacy-preserving, secure, robust, and governed throughout their lifecycle","Deploy AI systems as quickly as possible to gain competitive advantage","Restrict access to AI tools to only senior technical staff"],a:1,e:"AWS's Responsible AI framework is built around core dimensions: fairness, explainability, privacy and security, robustness, and governance. These principles guide how AWS builds its AI services and how it recommends customers approach AI deployment -- balancing capability with responsibility across the full AI lifecycle."},
+{d:3,q:"A company's AI hiring tool is shown to have disparate impact on candidates from certain universities that correlate with socioeconomic background. What should the company do?",o:["Continue using the tool since university attendance is not a legally protected characteristic","Investigate whether the proxy variable (university) correlates with protected characteristics, assess legal and ethical risk, and remediate or discontinue the tool","Increase model accuracy to improve overall performance","Reduce the weight of the university feature by 50% without further analysis"],a:1,e:"Proxy discrimination occurs when a seemingly neutral variable (university) correlates with a protected characteristic (race, socioeconomic status) and produces disparate impact. Even without explicit use of protected attributes, this can violate anti-discrimination law (EEOC, GDPR). Full root cause analysis, legal review, and remediation are required."},
+{d:3,q:"What does 'responsible disclosure' mean in the context of AI system vulnerabilities?",o:["Disclosing the AI system's capabilities in marketing materials before launch","A process of privately notifying an AI system provider about discovered vulnerabilities or harmful behaviors, giving them time to address the issue before public disclosure","Publicly posting all AI vulnerabilities immediately to maximize transparency","Disclosing all AI training data to the public to enable independent audits"],a:1,e:"Responsible disclosure (coordinated disclosure) is the security practice of privately reporting vulnerabilities or harmful AI behaviors to the system owner first, allowing time for investigation and remediation before public announcement. This balances the need for transparency and accountability with giving organizations reasonable time to fix issues without enabling immediate misuse."},
+{d:3,q:"An AI system used for medical imaging analysis achieves 95% accuracy overall but only 78% accuracy for patients from a specific ethnic group. What responsible AI concern does this raise?",o:["The model has a data quality issue unrelated to fairness","The model exhibits performance disparity across demographic groups, a fairness and equity concern requiring investigation and remediation","The 78% accuracy is acceptable since it is above random chance","The model should be deployed immediately since 95% overall accuracy meets the threshold"],a:1,e:"A 17-percentage-point performance gap between demographic groups in medical AI is a serious equity concern. The overall accuracy masks subgroup underperformance that could lead to worse healthcare outcomes for the affected population. This requires investigation of training data representativeness, potential retraining with more balanced data, and domain-specific fairness threshold evaluation."},
+{d:3,q:"What is 'AI governance' at an organizational level?",o:["The technical configuration of AI safety guardrails in production systems","The executive, policy, and process framework an organization establishes to ensure AI systems are developed, deployed, and monitored responsibly and in compliance with laws and values","The process of selecting which AI vendors and cloud providers to use","The IT governance framework for managing AI software licenses"],a:1,e:"Organizational AI governance encompasses: executive oversight and accountability, policies governing AI use and prohibited use cases, risk assessment processes before deployment, model review boards, incident response procedures, employee training, and compliance monitoring. It translates responsible AI principles into operational reality across the organization."},
+{d:3,q:"Which practice helps ensure an AI model remains aligned with the organization's values and policies after deployment in a dynamic production environment?",o:["Deploying the model once and assuming it remains safe indefinitely","Implementing continuous monitoring, regular bias and safety re-evaluation, user feedback mechanisms, and periodic model reviews with the ability to quickly update or roll back","Restricting user access to prevent exposure to edge cases","Using the largest available model since more capable models are inherently safer"],a:1,e:"AI systems require ongoing governance after deployment. Data distributions shift, misuse patterns emerge, and social contexts change. Continuous monitoring (SageMaker Model Monitor), user feedback loops, periodic safety re-evaluations, and rapid rollback capabilities form a responsible post-deployment lifecycle that keeps models aligned with organizational values over time."},
+
+/* ===== ADDITIONAL D4: SECURITY, COMPLIANCE & GOVERNANCE ===== */
+{d:4,q:"What is 'data residency' and why does it matter for organizations deploying AI on AWS?",o:["The practice of storing redundant copies of data in multiple regions for disaster recovery","The requirement that data must be stored and processed within specific geographic boundaries, often for regulatory or sovereignty reasons","The process of archiving old training datasets to reduce storage costs","The physical location of AWS data center hardware"],a:1,e:"Data residency requirements mandate that certain data (especially personal data of EU citizens under GDPR, health data, financial data) must not leave specific geographic or jurisdictional boundaries. When deploying AI on AWS, organizations must select appropriate AWS Regions and configure Bedrock and data storage services to keep data within required boundaries."},
+{d:4,q:"An AI application uses IAM roles to access Amazon Bedrock. A security review finds the role has AdministratorAccess attached. What is the correct remediation?",o:["This is acceptable since the role only calls Bedrock","Replace AdministratorAccess with a custom IAM policy granting only the specific Bedrock actions and resource ARNs the application needs","Add an additional read-only policy to balance the permissions","Move the application to a different AWS account"],a:1,e:"AdministratorAccess grants unrestricted access to all AWS services and resources, violating least privilege and creating massive blast radius if the role is compromised. Remediation is to create a custom IAM policy with only the specific Bedrock actions needed (e.g., bedrock:InvokeModel on specific model ARNs) and nothing else. This is a fundamental security practice."},
+{d:4,q:"What is 'encryption in transit' for an AI application using Amazon Bedrock, and how is it enforced?",o:["Encrypting model weights before they are transmitted to the GPU for inference","Ensuring all network communication between the application and Bedrock API is encrypted using TLS, which Bedrock enforces by default for all API calls","Encrypting user prompts before storing them in S3 for logging","Converting model outputs to a binary format before returning them to the client"],a:1,e:"Encryption in transit means all data moving between the application and Bedrock API is encrypted using TLS 1.2+ to prevent interception. Amazon Bedrock enforces TLS for all API calls by default. For applications running in a VPC, combining TLS with a PrivateLink VPC endpoint ensures data never traverses the public internet unencrypted."},
+{d:4,q:"Which AWS service provides automated security assessment of applications deployed on AWS to identify vulnerabilities, including EC2 and Lambda functions that may host AI application components?",o:["AWS Security Hub","Amazon Inspector","Amazon Macie","AWS Config"],a:1,e:"Amazon Inspector is an automated vulnerability management service that continuously scans EC2 instances, ECR container images, and Lambda functions for software vulnerabilities (CVEs) and unintended network exposure. For AI application components running on these compute services, Inspector provides automated security assessment."},
+{d:4,q:"A company must ensure its AI training data stored in S3 has not been tampered with between data collection and training. Which AWS feature provides data integrity verification?",o:["Amazon S3 versioning alone","S3 Object Lock with WORM (Write Once Read Many) configuration and S3 object checksums","Amazon Macie data classification","AWS CloudTrail API logging"],a:1,e:"S3 Object Lock prevents object modification or deletion for a specified retention period (WORM compliance). Combined with S3 object checksums (CRC32, SHA256), you can verify data integrity. This ensures training data has not been modified (data poisoning prevention), which is critical for regulated AI training pipelines."},
+{d:4,q:"What is the purpose of AWS IAM Identity Center (formerly AWS SSO) in an enterprise AI platform?",o:["Providing API keys for Bedrock authentication","Centralizing user authentication and access management across multiple AWS accounts and AI applications using a single identity provider","Automatically rotating IAM access keys for Bedrock service accounts","Managing billing and cost allocation across AI workloads"],a:1,e:"IAM Identity Center provides centralized SSO and access management across multiple AWS accounts using existing identity providers (Active Directory, Okta, Google Workspace). For enterprises with multiple AWS accounts for different AI environments (dev, staging, prod), it simplifies access management, enforces MFA, and provides a single audit trail for all user access."},
+{d:4,q:"An organization wants to ensure only approved foundation models can be invoked by applications in their AWS environment. How can they enforce this?",o:["Trust that developers will use only approved models","Use AWS Organizations Service Control Policies (SCPs) to allow bedrock:InvokeModel only for specific approved model ARNs","Use IAM password policies to restrict model access","Configure VPC security groups to block unapproved model endpoints"],a:1,e:"Service Control Policies (SCPs) in AWS Organizations act as guardrails at the organizational or account level. An SCP can restrict bedrock:InvokeModel to a whitelist of approved model ARNs (e.g., only specific Titan or Claude model versions), preventing applications in child accounts from invoking unapproved or uncertified models, regardless of their local IAM permissions."},
+{d:4,q:"Which type of AWS key management option gives a customer the MOST control over the cryptographic keys used to encrypt AI training data and model artifacts?",o:["AWS managed keys (automatically rotated by AWS)","Customer managed keys (CMKs) in AWS KMS, where the customer controls key policy, rotation, and can revoke access","S3-managed server-side encryption (SSE-S3)","Default encryption with no key management configuration"],a:1,e:"Customer managed keys (CMKs) in AWS KMS give organizations full control: define who can use and manage the key via key policies, configure automatic rotation, audit all cryptographic operations via CloudTrail, and if needed, revoke access by disabling or deleting the key. This is the highest control option and is required by some compliance frameworks."},
+{d:4,q:"What is 'shadow IT' risk in the context of enterprise AI governance, and how can AWS help address it?",o:["Employees using AI models to generate content during night shifts","Employees or teams using unauthorized AI tools or APIs outside of approved governance processes, creating unmanaged data exposure and compliance risks; AWS Service Control Policies and CloudTrail can detect and prevent unauthorized AI service usage","A security threat where AI models access shadow files on employee computers","The risk that AI systems make decisions in the background without user awareness"],a:1,e:"Shadow IT in AI governance occurs when employees bypass approved tools and use unauthorized AI services (personal ChatGPT accounts, unapproved APIs) with company data, creating unmanaged data exposure, IP risks, and compliance violations. SCPs can block API calls to unapproved services; CloudTrail detects unusual API activity; AI use policies and approved tooling reduce the incentive for shadow usage."},
+{d:4,q:"A regulated company needs to demonstrate that changes to their AI models follow a documented change management process. Which AWS capability supports this?",o:["Amazon CloudWatch alarms for model performance","Amazon SageMaker Model Registry with approval workflows, version tracking, and integration with CI/CD pipelines","AWS Trusted Advisor recommendations","Amazon S3 bucket versioning for storing model files"],a:1,e:"SageMaker Model Registry provides a central repository for tracking model versions, associated metadata (training data, metrics, parameters), and approval status. Approval workflows require designated reviewers to approve a model version before it can be deployed to production. This creates the auditable change management trail required by regulated industries."},
+{d:4,q:"What is the significance of 'PCI DSS compliance' for an AI application that processes payment card data?",o:["PCI DSS is only relevant for physical card payment terminals, not AI applications","Any AI application that stores, processes, or transmits cardholder data must comply with PCI DSS requirements including encryption, access control, monitoring, and network security","PCI DSS compliance is optional for AI applications since they use tokenized data","PCI DSS only applies to the AWS infrastructure layer, not the application"],a:1,e:"PCI DSS (Payment Card Industry Data Security Standard) applies to any system that stores, processes, or transmits cardholder data, regardless of whether it uses AI. An AI application analyzing payment transactions must implement PCI DSS controls: encryption, strict access control, network segmentation, audit logging, vulnerability management, and security testing. AWS provides a PCI DSS compliant infrastructure; the application and data handling are the customer's responsibility."},
+{d:4,q:"Which AWS service helps organizations continuously assess the compliance of their AWS resource configurations against a set of desired rules, including those relevant to AI workload security?",o:["Amazon Inspector","AWS Config with managed and custom rules","AWS Trusted Advisor","AWS Security Hub only"],a:1,e:"AWS Config continuously monitors and records AWS resource configurations and evaluates them against Config rules (desired state). Managed rules cover security best practices (e.g., S3 bucket encryption enabled, no public S3 buckets, IAM access key rotation). Custom rules can enforce organization-specific AI governance policies. Non-compliant resources trigger alerts and can auto-remediate."}
+];
+
+// Filter duplicates - remove the first version of the duplicate question
+QUESTIONS = QUESTIONS.filter(function(q, i) {
+  return !(i === 35); // remove duplicate RAG question (index 35 was a placeholder)
+});
+
+var state = {
+  qcount: 25,
+  timed: false,
+  answermode: 'after',
+  domainFilter: 'all',
+  session: null,
+  history: JSON.parse(localStorage.getItem('aif_history') || '[]'),
+  studyDomain: null
+};
+
+// Build domain chart
+function buildDomainChart() {
+  var html = '';
+  DOMAINS.forEach(function(d, i) {
+    html += '<div class="domain-row">' +
+      '<div class="domain-dot" style="background:' + d.color + ';"></div>' +
+      '<div class="domain-name">' + d.short + ': ' + d.name + '</div>' +
+      '<div class="domain-bar-wrap"><div class="domain-bar" style="width:' + d.pct + '%;background:' + d.color + ';"></div></div>' +
+      '<div class="domain-pct">' + d.pct + '%</div>' +
+      '</div>';
+  });
+  document.getElementById('domain-chart').innerHTML = html;
+}
+
+function selChip(el, group) {
+  var grp = document.getElementById(group === 'qcount' ? 'q-count-chips' : group === 'timed' ? 'timed-chips' : 'answer-chips');
+  grp.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('selected'); });
+  el.classList.add('selected');
+  if (group === 'qcount') state.qcount = parseInt(el.dataset.val);
+  else if (group === 'timed') state.timed = el.dataset.val === 'on';
+  else if (group === 'answermode') state.answermode = el.dataset.val;
+}
+
+function selDomain(el) {
+  document.getElementById('domain-chips').querySelectorAll('.chip').forEach(function(c) { c.classList.remove('selected'); });
+  el.classList.add('selected');
+  state.domainFilter = el.dataset.val;
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('screen-' + tab).classList.add('active');
+  event.target.classList.add('active');
+  if (tab === 'history') renderHistory();
+  if (tab === 'study') renderStudyDomains();
+}
+
+function startExam() {
+  var pool = QUESTIONS.filter(function(q) {
+    return state.domainFilter === 'all' || q.d === parseInt(state.domainFilter);
+  });
+  if (pool.length === 0) { alert('No questions available for selected domain.'); return; }
+  pool = shuffle(pool.slice());
+  var questions = pool.slice(0, Math.min(state.qcount, pool.length));
+  // Mark some as unscored (simulate ~23% unscored)
+  var unscoredCount = Math.round(questions.length * 0.23);
+  var unscoredIdx = shuffle(questions.map(function(_, i) { return i; })).slice(0, unscoredCount);
+  state.session = {
+    questions: questions,
+    answers: new Array(questions.length).fill(null),
+    flagged: new Array(questions.length).fill(false),
+    unscoredIdx: unscoredIdx,
+    current: 0,
+    revealed: new Array(questions.length).fill(false),
+    startTime: Date.now(),
+    timerInterval: null,
+    timeLimit: 90 * 60
+  };
+  renderExam();
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('screen-exam').classList.add('active');
+  if (state.timed) startTimer();
+  window.scrollTo(0, 0);
+}
+
+function startTimer() {
+  var s = state.session;
+  s.timerInterval = setInterval(function() {
+    var elapsed = Math.floor((Date.now() - s.startTime) / 1000);
+    var remaining = s.timeLimit - elapsed;
+    var badge = document.getElementById('timer-badge');
+    if (!badge) { clearInterval(s.timerInterval); return; }
+    if (remaining <= 0) {
+      clearInterval(s.timerInterval);
+      finishExam();
+      return;
+    }
+    var m = Math.floor(remaining / 60);
+    var sec = remaining % 60;
+    badge.textContent = (m < 10 ? '0' : '') + m + ':' + (sec < 10 ? '0' : '') + sec;
+    if (remaining <= 300) badge.classList.add('warning'); else badge.classList.remove('warning');
+  }, 1000);
+}
+
+function renderExam() {
+  var s = state.session;
+  var html = '<div class="exam-topbar"><div class="exam-topbar-inner">' +
+    '<div class="exam-progress-wrap">' +
+    '<div class="exam-progress-text"><span>Q' + (s.current + 1) + ' of ' + s.questions.length + '</span>' +
+    '<span>' + s.answers.filter(function(a) { return a !== null; }).length + ' answered</span></div>' +
+    '<div class="exam-progress-bar"><div class="exam-progress-fill" style="width:' + ((s.current + 1) / s.questions.length * 100) + '%;"></div></div>' +
+    '</div>' +
+    (state.timed ? '<div class="timer-badge" id="timer-badge">90:00</div>' : '') +
+    '</div></div>';
+
+  var q = s.questions[s.current];
+  var isUnscored = s.unscoredIdx.indexOf(s.current) !== -1;
+  var answered = s.answers[s.current] !== null;
+  var revealed = s.revealed[s.current];
+  var domainInfo = DOMAINS[q.d];
+
+  html += '<div style="max-width:820px;margin:0 auto;padding:20px 16px 100px;">';
+  html += '<div class="q-block">';
+  html += '<div class="q-meta">';
+  html += '<span class="q-num">Question ' + (s.current + 1) + '</span>';
+  html += '<span class="q-domain-badge" style="background:' + hexToRgba(domainInfo.color, 0.12) + ';color:' + domainInfo.color + ';">' + domainInfo.short + ': ' + domainInfo.name + '</span>';
+  if (isUnscored) html += '<span class="badge" style="background:var(--yellow-dim);color:var(--yellow);">Pretest</span>';
+  if (s.flagged[s.current]) html += '<span class="badge" style="background:var(--yellow-dim);color:var(--yellow);">&#9873; Flagged</span>';
+  html += '</div>';
+  html += '<div class="q-text">' + q.q + '</div>';
+  html += '<div class="options">';
+
+  var letters = ['A', 'B', 'C', 'D', 'E'];
+  q.o.forEach(function(opt, oi) {
+    var cls = 'option';
+    if (answered || revealed) {
+      if (state.answermode === 'instant' || revealed) {
+        if (oi === q.a) cls += ' reveal-correct';
+        else if (oi === s.answers[s.current]) cls += ' incorrect';
+      } else {
+        if (oi === s.answers[s.current]) cls += ' selected';
+      }
+    } else {
+      if (oi === s.answers[s.current]) cls += ' selected';
+    }
+    html += '<div class="' + cls + '" onclick="selectAnswer(' + oi + ')">' +
+      '<div class="opt-letter">' + letters[oi] + '</div>' +
+      '<div class="opt-text">' + opt + '</div>' +
+      '</div>';
+  });
+  html += '</div>';
+
+  if ((answered && state.answermode === 'instant') || revealed) {
+    html += '<div class="explanation"><strong>' + (s.answers[s.current] === q.a ? '&#10003; Correct' : '&#10007; Incorrect') + '</strong> - ' + q.e + '</div>';
+  }
+  html += '</div>';
+
+  // Nav row
+  html += '<div class="nav-row">';
+  html += '<button class="btn btn-outline" onclick="navQ(-1)"' + (s.current === 0 ? ' disabled style="opacity:0.4;"' : '') + '>&#8592; Prev</button>';
+  html += '<div style="display:flex;gap:8px;">';
+  html += '<button class="q-flag' + (s.flagged[s.current] ? ' flagged' : '') + '" onclick="toggleFlag()">&#9873; ' + (s.flagged[s.current] ? 'Flagged' : 'Flag') + '</button>';
+  if (answered && state.answermode === 'after' && !revealed) {
+    html += '<button class="btn btn-ghost" onclick="revealAnswer()">Reveal</button>';
+  }
+  html += '</div>';
+  if (s.current < s.questions.length - 1) {
+    html += '<button class="btn btn-outline" onclick="navQ(1)">Next &#8594;</button>';
+  } else {
+    html += '<button class="btn btn-primary" style="width:auto;margin-top:0;" onclick="finishExam()">Finish Exam</button>';
+  }
+  html += '</div>';
+
+  // Question grid
+  html += '<div class="card" style="margin-top:16px;">';
+  html += '<div class="card-title" style="margin-bottom:10px;">Question Navigator</div>';
+  html += '<div style="display:flex;flex-wrap:wrap;gap:5px;">';
+  s.questions.forEach(function(_, qi) {
+    var bg = 'var(--bg3)'; var col = 'var(--text2)'; var brd = 'var(--border)';
+    if (qi === s.current) { bg = 'var(--aws-orange)'; col = '#000'; brd = 'var(--aws-orange)'; }
+    else if (s.answers[qi] !== null) { bg = 'var(--bg4)'; col = 'var(--text)'; brd = 'var(--border2)'; }
+    if (s.flagged[qi]) { brd = 'var(--yellow)'; }
+    html += '<button onclick="goToQ(' + qi + ')" style="width:32px;height:32px;border-radius:6px;border:1px solid ' + brd + ';background:' + bg + ';color:' + col + ';font-size:11px;font-weight:600;cursor:pointer;">' + (qi + 1) + '</button>';
+  });
+  html += '</div></div></div>';
+
+  document.getElementById('screen-exam').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function selectAnswer(oi) {
+  var s = state.session;
+  if (s.revealed[s.current] && state.answermode === 'after') return;
+  s.answers[s.current] = oi;
+  renderExam();
+}
+
+function revealAnswer() {
+  state.session.revealed[state.session.current] = true;
+  renderExam();
+}
+
+function toggleFlag() {
+  var s = state.session;
+  s.flagged[s.current] = !s.flagged[s.current];
+  renderExam();
+}
+
+function navQ(dir) {
+  var s = state.session;
+  var next = s.current + dir;
+  if (next >= 0 && next < s.questions.length) {
+    s.current = next;
+    renderExam();
+  }
+}
+
+function goToQ(qi) {
+  state.session.current = qi;
+  renderExam();
+}
+
+function finishExam() {
+  var s = state.session;
+  if (s.timerInterval) clearInterval(s.timerInterval);
+  var scored = s.questions.filter(function(_, i) { return s.unscoredIdx.indexOf(i) === -1; });
+  var scoredAnswers = scored.map(function(q, si) {
+    var origIdx = s.questions.indexOf(q);
+    return s.answers[origIdx] === q.a;
+  });
+  var correct = scoredAnswers.filter(Boolean).length;
+  var total = scored.length;
+  var pct = total > 0 ? correct / total : 0;
+  var scaled = Math.round(100 + pct * 900);
+  var passed = scaled >= 700;
+  var elapsed = Math.floor((Date.now() - s.startTime) / 1000);
+  var mins = Math.floor(elapsed / 60);
+  var secs = elapsed % 60;
+
+  // Domain breakdown
+  var domainStats = DOMAINS.map(function(d, di) {
+    var qs = scored.filter(function(q) { return q.d === di; });
+    var ans = qs.map(function(q) { return { correct: s.answers[s.questions.indexOf(q)] === q.a }; });
+    var c = ans.filter(function(a) { return a.correct; }).length;
+    return { name: d.name, short: d.short, color: d.color, correct: c, total: qs.length };
+  });
+
+  // Save to history
+  var record = {
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+    scaled: scaled,
+    pct: Math.round(pct * 100),
+    correct: correct,
+    total: total,
+    questions: s.questions.length,
+    passed: passed,
+    elapsed: mins + 'm ' + secs + 's',
+    domains: domainStats
+  };
+  state.history.unshift(record);
+  if (state.history.length > 20) state.history.pop();
+  localStorage.setItem('aif_history', JSON.stringify(state.history));
+
+  renderScoreScreen(record, s);
+  document.querySelectorAll('.screen').forEach(function(sc) { sc.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('screen-score').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function renderScoreScreen(r, s) {
+  var html = '<div style="max-width:820px;margin:0 auto;padding:20px 16px 40px;">';
+  html += '<h2 style="font-size:17px;font-weight:700;margin-bottom:16px;">Exam Results</h2>';
+  html += '<div class="score-hero">';
+  html += '<div class="score-label">Scaled Score</div>';
+  html += '<div class="score-value ' + (r.passed ? 'pass' : 'fail') + '">' + r.scaled + '</div>';
+  html += '<div class="score-verdict ' + (r.passed ? 'pass' : 'fail') + '">' + (r.passed ? '&#10003; PASS' : '&#10007; FAIL') + ' &nbsp;|&nbsp; Passing: 700</div>';
+  html += '<div class="score-stats">';
+  html += '<div class="score-stat"><div class="score-stat-val">' + r.correct + '/' + r.total + '</div><div class="score-stat-lbl">Scored Correct</div></div>';
+  html += '<div class="score-stat"><div class="score-stat-val">' + r.pct + '%</div><div class="score-stat-lbl">Accuracy</div></div>';
+  html += '<div class="score-stat"><div class="score-stat-val">' + r.questions + '</div><div class="score-stat-lbl">Total Qs</div></div>';
+  html += '<div class="score-stat"><div class="score-stat-val">' + r.elapsed + '</div><div class="score-stat-lbl">Time</div></div>';
+  html += '</div></div>';
+
+  html += '<div class="card"><div class="card-title">Domain Performance</div><div class="card-sub" style="margin-bottom:12px;">Scored questions only</div>';
+  r.domains.forEach(function(d) {
+    if (d.total === 0) return;
+    var pct = Math.round(d.correct / d.total * 100);
+    html += '<div class="domain-result">';
+    html += '<div class="domain-result-dot" style="background:' + d.color + ';"></div>';
+    html += '<div class="domain-result-name">' + d.short + ': ' + d.name + '</div>';
+    html += '<div class="domain-result-bar-wrap"><div class="domain-result-bar" style="width:' + pct + '%;background:' + d.color + ';"></div></div>';
+    html += '<div class="domain-result-pct" style="color:' + (pct >= 70 ? 'var(--green)' : 'var(--red)') + ';">' + pct + '%</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Review wrong answers
+  var wrong = s.questions.map(function(q, i) {
+    var isUnscored = s.unscoredIdx.indexOf(i) !== -1;
+    if (s.answers[i] !== q.a) return { q: q, i: i, ans: s.answers[i], unscored: isUnscored };
+    return null;
+  }).filter(Boolean);
+
+  if (wrong.length > 0) {
+    html += '<div class="card"><div class="card-title">Review Missed Questions (' + wrong.length + ')</div>';
+    wrong.forEach(function(item) {
+      var letters = ['A', 'B', 'C', 'D'];
+      var d = DOMAINS[item.q.d];
+      html += '<div style="border-top:1px solid var(--border);padding:14px 0;">';
+      html += '<div style="font-size:12px;color:' + d.color + ';margin-bottom:6px;">' + d.short + ' &middot; Q' + (item.i + 1) + (item.unscored ? ' &middot; Pretest' : '') + '</div>';
+      html += '<div style="font-size:14px;margin-bottom:8px;">' + item.q.q + '</div>';
+      if (item.ans !== null) {
+        html += '<div style="font-size:13px;color:var(--red);margin-bottom:4px;">&#10007; You answered: ' + letters[item.ans] + '. ' + item.q.o[item.ans] + '</div>';
+      } else {
+        html += '<div style="font-size:13px;color:var(--text3);margin-bottom:4px;">&#8212; Not answered</div>';
+      }
+      html += '<div style="font-size:13px;color:var(--green);margin-bottom:8px;">&#10003; Correct: ' + letters[item.q.a] + '. ' + item.q.o[item.q.a] + '</div>';
+      html += '<div style="font-size:12px;color:var(--text2);line-height:1.6;">' + item.q.e + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  html += '<div style="display:flex;gap:10px;margin-top:8px;">';
+  html += '<button class="btn btn-primary" style="flex:1;" onclick="startExam()">Retake Exam</button>';
+  html += '<button class="btn btn-outline" style="flex:1;" onclick="goHome()">&#8592; Back to Home</button>';
+  html += '</div>';
+  html += '</div>';
+  document.getElementById('screen-score').innerHTML = html;
+}
+
+function goHome() {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('screen-home').classList.add('active');
+  document.querySelectorAll('.nav-tab')[0].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function renderHistory() {
+  var el = document.getElementById('history-list');
+  if (state.history.length === 0) {
+    el.innerHTML = '<div class="history-empty">No exams taken yet.<br>Complete a practice exam to see your history here.</div>';
+    return;
+  }
+  var html = '';
+  state.history.forEach(function(r) {
+    html += '<div class="history-item">';
+    html += '<div class="history-score ' + (r.passed ? 'pass' : 'fail') + '">' + r.scaled + '</div>';
+    html += '<div class="history-meta">';
+    html += '<div class="history-date">' + r.date + ' &middot; ' + r.time + ' &middot; ' + r.elapsed + '</div>';
+    html += '<div class="history-detail">' + r.correct + '/' + r.total + ' scored correct (' + r.pct + '%) &middot; ' + r.questions + ' total questions</div>';
+    html += '</div>';
+    html += '<div class="history-verdict ' + (r.passed ? 'pass' : 'fail') + '">' + (r.passed ? 'PASS' : 'FAIL') + '</div>';
+    html += '</div>';
+  });
+  html += '<button class="btn btn-ghost" style="width:100%;margin-top:8px;color:var(--red);" onclick="clearHistory()">Clear History</button>';
+  el.innerHTML = html;
+}
+
+function clearHistory() {
+  if (confirm('Clear all exam history?')) {
+    state.history = [];
+    localStorage.removeItem('aif_history');
+    renderHistory();
+  }
+}
+
+// STUDY TAB
+var FLASHCARDS = [
+  { d: 0, q: "What are the three main types of machine learning?", a: "Supervised (labeled data), Unsupervised (unlabeled data), and Reinforcement (reward-based agent)." },
+  { d: 0, q: "What is overfitting?", a: "When a model learns training data too specifically and fails to generalize to new data. Signs: high training accuracy, low test accuracy." },
+  { d: 0, q: "What is the difference between classification and regression?", a: "Classification predicts discrete categories (spam/not spam). Regression predicts continuous numeric values (house price)." },
+  { d: 0, q: "What does Amazon SageMaker Autopilot do?", a: "Automatically performs data preprocessing, algorithm selection, hyperparameter tuning, and model evaluation (AutoML). Returns the best-performing model with full transparency." },
+  { d: 0, q: "What is the bias-variance tradeoff?", a: "High bias = underfitting (too simple). High variance = overfitting (too complex). Good models balance both, achieving low training and test error." },
+  { d: 0, q: "What is Amazon Forecast used for?", a: "Managed time-series forecasting. Generates probabilistic predictions for multiple related time series, used for demand, inventory, and financial forecasting." },
+  { d: 0, q: "What is transfer learning?", a: "Applying knowledge (weights/representations) learned from a large source task to a different but related target task, reducing training data and compute needed." },
+  { d: 1, q: "What is a large language model (LLM)?", a: "A transformer-based neural network trained on massive text datasets that can understand, generate, summarize, translate, and reason about natural language." },
+  { d: 1, q: "What does temperature control in an LLM?", a: "Randomness/creativity of output. High temperature = more diverse. Low temperature = more deterministic. Temperature 0 = greedy (highest probability token always chosen)." },
+  { d: 1, q: "What is hallucination in generative AI?", a: "When the model generates confident-sounding but factually incorrect or fabricated information. A key risk in high-stakes domains." },
+  { d: 1, q: "What is prompt engineering?", a: "Designing inputs (prompts) to guide model behavior without changing weights. Techniques: zero-shot, few-shot, chain-of-thought, system prompts." },
+  { d: 1, q: "What is Amazon Bedrock?", a: "Fully managed service providing API access to foundation models from AWS (Titan) and third parties (Anthropic, Meta, Cohere, Mistral) without managing infrastructure." },
+  { d: 1, q: "What is RAG (Retrieval-Augmented Generation)?", a: "Dynamically retrieving relevant documents from a knowledge base and injecting them into the prompt at inference time. Reduces hallucination and handles post-training knowledge." },
+  { d: 1, q: "What is fine-tuning?", a: "Continuing model training on task-specific data to update weights. Best for deep style/domain adaptation beyond what prompting can achieve." },
+  { d: 1, q: "What is an embedding?", a: "A dense numerical vector representing the semantic meaning of text. Similar meaning = vectors close in space. Foundation of semantic search and RAG retrieval." },
+  { d: 1, q: "What is context window?", a: "Maximum token length (input + output) an LLM can process in one interaction. Limits document length and conversation history the model can consider." },
+  { d: 2, q: "What is Amazon Bedrock Knowledge Bases?", a: "A managed RAG feature. Connect S3 or other data sources; Bedrock handles chunking, embedding, indexing, and retrieval automatically at inference time." },
+  { d: 2, q: "What is Amazon Bedrock Guardrails?", a: "Infrastructure-level content safety controls: topic denial, word filters, PII redaction, grounding checks, and harmful content filtering applied to inputs and outputs." },
+  { d: 2, q: "What is Amazon Bedrock Agents?", a: "Enables agentic AI: a model orchestrates multi-step tasks by reasoning about a goal, calling APIs/tools (action groups), and iterating until the task is complete." },
+  { d: 2, q: "What is grounding in AI responses?", a: "Anchoring model outputs to specific verifiable source documents or retrieved evidence rather than relying on parametric knowledge. RAG is the primary grounding technique." },
+  { d: 2, q: "What is prompt injection?", a: "An attack where malicious input overrides system instructions, causing unintended model behavior. Critical risk when processing untrusted user or external content." },
+  { d: 2, q: "What is Amazon Bedrock Model Evaluation?", a: "Compares multiple foundation models on your test dataset using built-in metrics (ROUGE, BERTScore) or human evaluations for data-driven model selection." },
+  { d: 2, q: "What is semantic search vs keyword search?", a: "Semantic search understands meaning/intent using embeddings, finding relevant results even without exact term matches. Keyword search requires literal term matches." },
+  { d: 3, q: "What is AI bias?", a: "Systematic unfairness in model outputs toward protected groups, often from biased training data. Example: lower loan approval for certain demographics." },
+  { d: 3, q: "What is Amazon SageMaker Clarify?", a: "Detects statistical bias in datasets and models across sensitive features, and generates explainability reports using SHAP values to explain individual predictions." },
+  { d: 3, q: "What is a model card?", a: "Documentation accompanying a model describing intended use, evaluation results, known limitations, performance across groups, and ethical considerations. Responsible AI best practice." },
+  { d: 3, q: "What is human-in-the-loop (HITL)?", a: "A design pattern where a qualified human reviews and approves AI recommendations before they are acted upon. Essential in high-stakes domains like healthcare and finance." },
+  { d: 3, q: "What is algorithmic accountability?", a: "Ensuring AI decision systems are auditable, decisions are explainable, and affected individuals have means of redress for AI-driven decisions affecting them." },
+  { d: 3, q: "What is the AWS shared responsibility model for AI?", a: "AWS secures infrastructure. Customer is responsible for application design, prompt safety, output validation, data handling, and compliance with applicable laws for their use case." },
+  { d: 4, q: "What AWS service provides compliance reports (SOC, PCI, HIPAA) for auditors?", a: "AWS Artifact provides on-demand access to compliance reports and certifications including SOC 1/2/3, PCI DSS, HIPAA, ISO 27001, and FedRAMP." },
+  { d: 4, q: "What is the principle of least privilege for AI?", a: "The AI application IAM role should have only the minimum Bedrock permissions needed (e.g., InvokeModel for specific models), not broad administrative access." },
+  { d: 4, q: "What is Amazon Bedrock invocation logging?", a: "Captures full prompt and response payloads and writes them to S3 or CloudWatch Logs. Required for compliance auditing and debugging in regulated industries." },
+  { d: 4, q: "What is AWS PrivateLink used for with Bedrock?", a: "Creates a private VPC endpoint ensuring all Bedrock API traffic stays within the AWS network without traversing the public internet. Required for strict data residency compliance." },
+  { d: 4, q: "What is Amazon SageMaker Model Monitor?", a: "Continuously monitors deployed ML models for data quality issues, statistical drift, model quality degradation, and bias drift. Alerts trigger investigation and retraining." },
+  { d: 4, q: "What is Amazon Macie used for in AI governance?", a: "Discovers and classifies sensitive data (PII, credentials, financial data) in S3. Used to audit training datasets for sensitive data before model training." },
+  { d: 4, q: "What is model governance?", a: "Policies and processes for managing AI model lifecycle: approval workflows, versioning, monitoring, incident response, decommissioning, and audit documentation." }
+];
+
+function renderStudyDomains() {
+  var el = document.getElementById('study-domain-list');
+  var fc = document.getElementById('study-flashcard-area');
+  fc.style.display = 'none';
+  el.style.display = 'block';
+  var html = '<p style="font-size:13px;color:var(--text2);margin-bottom:16px;">Select a domain to review key concepts as flashcards. Tap a card to reveal the answer.</p>';
+  DOMAINS.forEach(function(d, di) {
+    var count = FLASHCARDS.filter(function(f) { return f.d === di; }).length;
+    html += '<button class="study-domain-btn" onclick="openStudyDomain(' + di + ')">' +
+      '<div class="study-domain-icon" style="background:' + hexToRgba(d.color, 0.12) + ';">' + d.icon + '</div>' +
+      '<div><div class="study-domain-name">' + d.short + ': ' + d.name + '</div>' +
+      '<div class="study-domain-sub">' + d.pct + '% of exam &middot; ' + count + ' flashcards</div></div>' +
+      '<div class="study-domain-arrow">&#8594;</div>' +
+      '</button>';
+  });
+  el.innerHTML = html;
+}
+
+function openStudyDomain(di) {
+  state.studyDomain = di;
+  var cards = shuffle(FLASHCARDS.filter(function(f) { return f.d === di; }).slice());
+  var d = DOMAINS[di];
+  document.getElementById('study-domain-list').style.display = 'none';
+  var fc = document.getElementById('study-flashcard-area');
+  fc.style.display = 'block';
+  var html = '<button class="btn btn-ghost" onclick="renderStudyDomains()" style="margin-bottom:12px;">&#8592; All Domains</button>';
+  html += '<h3 style="font-size:15px;font-weight:600;margin-bottom:4px;color:' + d.color + ';">' + d.short + ': ' + d.name + '</h3>';
+  html += '<p style="font-size:12px;color:var(--text2);margin-bottom:16px;">' + cards.length + ' flashcards &middot; Tap to flip</p>';
+  cards.forEach(function(card, ci) {
+    html += '<div class="flashcard" id="fc' + ci + '" onclick="flipCard(' + ci + ')">' +
+      '<div class="flashcard-hint" id="fch' + ci + '">Tap to reveal answer</div>' +
+      '<div class="flashcard-q">' + card.q + '</div>' +
+      '<div class="flashcard-a" id="fca' + ci + '">' + card.a + '</div>' +
+      '</div>';
+  });
+  fc.innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function flipCard(ci) {
+  var card = document.getElementById('fc' + ci);
+  card.classList.toggle('flipped');
+  var hint = document.getElementById('fch' + ci);
+  hint.textContent = card.classList.contains('flipped') ? 'Answer' : 'Tap to reveal answer';
+}
+
+// UTILS
+function shuffle(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
+}
+
+function hexToRgba(hex, alpha) {
+  var r = parseInt(hex.slice(1, 3), 16);
+  var g = parseInt(hex.slice(3, 5), 16);
+  var b = parseInt(hex.slice(5, 7), 16);
+  return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+}
+
+window.onload = function() {
+  buildDomainChart();
+};
+</script>
+</body>
+</html>
