@@ -176,6 +176,7 @@ h1 {
 .card-cgrc { --card-accent: #5b8dee; }
 .card-aws  { --card-accent: #e8973a; }
 .card-gcdl { --card-accent: #4285f4; }
+.card-aif  { --card-accent: #e8973a; }
 
 .card-icon {
   width: 44px;
@@ -195,6 +196,7 @@ h1 {
 .card-cgrc .card-icon { background: rgba(91,141,238,0.12); color: #5b8dee; border: 1px solid rgba(91,141,238,0.25); }
 .card-aws  .card-icon { background: rgba(232,151,58,0.12);  color: #e8973a; border: 1px solid rgba(232,151,58,0.25); }
 .card-gcdl .card-icon { background: rgba(66,133,244,0.12);  color: #4285f4; border: 1px solid rgba(66,133,244,0.25); }
+.card-aif  .card-icon { background: rgba(232,151,58,0.12);  color: #e8973a; border: 1px solid rgba(232,151,58,0.25); }
 
 .card-body {
   flex: 1;
@@ -250,7 +252,8 @@ h1 {
 .card:nth-child(2) { animation: fadeUp 0.4s 0.18s ease both; }
 .card:nth-child(3) { animation: fadeUp 0.4s 0.26s ease both; }
 .card:nth-child(4) { animation: fadeUp 0.4s 0.34s ease both; }
-.footer  { animation: fadeUp 0.4s 0.42s ease both; }
+.card:nth-child(5) { animation: fadeUp 0.4s 0.42s ease both; }
+.footer  { animation: fadeUp 0.4s 0.50s ease both; }
 
 @media (max-width: 480px) {
   .card { padding: 15px 16px; gap: 14px; }
@@ -302,6 +305,15 @@ h1 {
       <div class="card-body">
         <div class="card-title">Google CDL Practice Exam</div>
         <div class="card-meta">Google Cloud Digital Leader</div>
+      </div>
+      <div class="card-arrow">&#8594;</div>
+    </a>
+
+    <a class="card card-aif" href="AWS_AIF_C01_Practice_Exam.html">
+      <div class="card-icon">AWS<br>AIF</div>
+      <div class="card-body">
+        <div class="card-title">AWS AI Practitioner Practice Exam</div>
+        <div class="card-meta">Certified AI Practitioner &nbsp;·&nbsp; AIF-C01 &nbsp;·&nbsp; 5 domains</div>
       </div>
       <div class="card-arrow">&#8594;</div>
     </a>
